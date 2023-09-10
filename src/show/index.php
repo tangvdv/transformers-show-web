@@ -9,6 +9,7 @@
 <body onload="getShows()">
 <?php include_once __DIR__."/../includes/header.php"; ?>
     <main>
+    <button type="button" class="btn btn-success m-2" onclick="window.location.href=`/src/show/createShow.php`;">Create</button>
     <div class="container">
         <div class="mb-3 text-center">
             <input class="form-control m-4" type="search" placeholder="Type to search...">

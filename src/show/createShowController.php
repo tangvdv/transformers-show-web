@@ -10,22 +10,26 @@ $description = $_POST["show-description"];
 $type = $_POST["show-type"];
 $release_date = $_POST["show-release-date"];
 $image = $_FILES["show-image"];
-$id = $_GET["id"];
-$oldFileName = $_GET["image"];
 $newFileName = "";
+
+if(!isset($name) || empty($name)){
+    header("location:createShow.php?error=Name field empty");
+    die;
+}
+
+if(!isset($type) || empty($type)){
+    header("location:createShow.php?error=Type field empty");
+    die;
+}
+
+if(!isset($release_date) || empty($release_date)){
+    header("location:createShow.php?error=Release date field empty");
+    die;
+}
 
 if(isset($image["name"]) && !empty($image["name"])){
     
     $uploadDir = $_SERVER['DOCUMENT_ROOT']."\images\show\\";
-
-    /*
-    if(isset($oldFileName) && !empty($oldFileName)){
-        $filePathToDelete = $uploadDir . $oldFileName;
-        if(file_exists($filePathToDelete)){
-            unlink($filePathToDelete);
-        }
-    }
-    */
     
     $fileExtension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
 
@@ -42,6 +46,10 @@ if(isset($image["name"]) && !empty($image["name"])){
         }
     }
 }
+else{
+    header("location:createShow.php?error=Image field empty");
+    die;
+}
 
 $data = array(
     "show_name" => $name,
@@ -53,4 +61,4 @@ $data = array(
 
 $data = json_encode($data);
 
-echo "<script type='text/javascript'>updateShow({$id},{$data});</script>";
+echo "<script type='text/javascript'>createShow({$data});</script>";

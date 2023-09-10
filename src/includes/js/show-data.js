@@ -24,7 +24,7 @@ async function getShows(){
             div.classList.add("col-md-3", "col-sm-1");
             div.id = show.id;
             div.innerHTML = 
-            `<div type="button" class="poster-div card shadow-sm" onclick="redirectShow(${show.id})">
+            `<div type="button" class="poster-div card shadow-sm" onclick="window.location.href='/src/show/show.php?id=${show.id}';">
                 <img class="poster rounded-2" src="/images/show/${show.image}">
                 <div class="card-body">
                     <p class="card-text text-center fs-5">${show.show_name}</p>
@@ -68,11 +68,7 @@ async function displayUpdateShow(id){
 }
 
 function redirectShow(id){
-    window.location.href = `/src/show/show.php?id=${id}`;
-}
-
-function redirectUpdateShow(id){
-    window.location.href = `/src/show/updateShow.php?id=${id}`;
+    window.location.href=`/src/show/show.php?id=${id}`;
 }
 
 async function updateShow(id, data){
@@ -104,6 +100,38 @@ async function updateShow(id, data){
             window.location.href = `/src/show/updateShow.php?id=${id}&error=${data.error.description}`;
         } else {
             window.location.href = `/src/show/show.php?id=${id}`;
+        }
+    }).catch(function(err) {
+        console.error(err);
+    });
+}
+
+async function createShow(data){
+    params = {};
+    Object.keys(data).forEach(key => {
+        if(data[key]){
+            params[key] = data[key];
+        }
+    });
+
+    const options = {
+        method: 'POST',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params)  
+    };
+
+    fetch(`${api_url}`, options)
+    .then(res => {
+        return res.json();
+    }).then(data => {
+        console.log(data);
+        if (data.statusCode === 404) {
+            window.location.href = `/src/show/createShow.php?error=${data.error.description}`;
+        } else {
+            window.location.href = `/src/show/index.php`;
         }
     }).catch(function(err) {
         console.error(err);

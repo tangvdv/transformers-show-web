@@ -16,7 +16,7 @@ if(!isset($id) || empty($id)){
 <?php include_once __DIR__."/../includes/header.php"; ?>
 <body onload="displayShow(<?php echo $id; ?>)">
     <main>
-        <button type="button" class="btn btn-success m-2" onclick="redirectUpdateShow(<?php echo $id; ?>)">Update</button>
+        <button type="button" class="btn btn-success m-2" onclick="window.location.href=`/src/show/updateShow.php?id=${<?php echo $id?>}`;">Update</button>
         <div class="py-3 text-center container">
             <div class="row">
                 <div class="col-lg-6 col-md-8 mx-auto">
