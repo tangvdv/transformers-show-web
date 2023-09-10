@@ -37,17 +37,34 @@ async function getShows(){
 }
 
 async function getShow(id){
-    await fetch(`${api_url}/id/${id}`)
-    .then(res =>{
-        return res.json()
-    })
-    .then(data=>{
-        show = data.data;
-        document.getElementById("show-name").innerHTML = show.show_name;
-        document.getElementById("show-description").innerHTML = show.description;
-        document.getElementById("show-release-date").innerHTML = show.release_date;
-        document.getElementById("show-image").src = `/images/show/${show.image}`;
-    });
+    let show;
+    try{
+        const res = await fetch(`${api_url}/id/${id}`)
+        const data = await res.json();
+        return data.data;
+    }
+    catch{
+        console.error(error);
+    }
+    return show;
+}
+
+async function displayShow(id){
+    show = await getShow(id);
+    document.getElementById("show-name").innerHTML = show.show_name;
+    document.getElementById("show-description").innerHTML = show.description;
+    document.getElementById("show-release-date").innerHTML = show.release_date;
+    document.getElementById("show-image").src = `/images/show/${show.image}`;
+}
+
+async function displayUpdateShow(id){
+    show = await getShow(id);
+    document.getElementById("form").action = `updateShowController.php?id=${id}&image=${show.image}`;
+    document.getElementById("show-name").value = show.show_name;
+    document.getElementById("show-description").innerHTML = show.description;
+    document.getElementById("show-type").value = show.type;
+    document.getElementById("show-release-date").value = show.release_date;
+    document.getElementById("show-image").src = `/images/show/${show.image}`;
 }
 
 function redirectShow(id){
@@ -58,6 +75,37 @@ function redirectUpdateShow(id){
     window.location.href = `/src/show/updateShow.php?id=${id}`;
 }
 
-async function updateShow($id){
-    console.log("yo");
+async function updateShow(id, data){
+    show = await getShow(id);
+    params = {};
+    Object.keys(data).forEach(key => {
+        if(data[key] !== show[key]){
+            if(data[key]){
+                params[key] = data[key];
+            }
+        }
+    });
+
+    const options = {
+        method: 'PUT',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(params)  
+    };
+
+    fetch(`${api_url}/${id}`, options)
+    .then(res => {
+        return res.json();
+    }).then(data => {
+        console.log(data);
+        if (data.statusCode === 404) {
+            window.location.href = `/src/show/updateShow.php?id=${id}&error=${data.error.description}`;
+        } else {
+            window.location.href = `/src/show/show.php?id=${id}`;
+        }
+    }).catch(function(err) {
+        console.error(err);
+    });
 }

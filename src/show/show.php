@@ -14,7 +14,7 @@ if(!isset($id) || empty($id)){
     <title>Show</title>
 </head>
 <?php include_once __DIR__."/../includes/header.php"; ?>
-<body onload="getShow(<?php echo $id; ?>)">
+<body onload="displayShow(<?php echo $id; ?>)">
     <main>
         <button type="button" class="btn btn-success m-2" onclick="redirectUpdateShow(<?php echo $id; ?>)">Update</button>
         <div class="py-3 text-center container">
