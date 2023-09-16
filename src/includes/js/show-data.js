@@ -1,4 +1,4 @@
-const api_url = "http://localhost:3000/show";
+const show_api_url = "http://localhost:3000/show";
 
 async function getShows(){
     let shows = [];
@@ -13,7 +13,7 @@ async function getShows(){
         })
     })
 
-    await fetch(api_url)
+    await fetch(show_api_url)
     .then(res => {
         return res.json();
     })
@@ -37,16 +37,14 @@ async function getShows(){
 }
 
 async function getShow(id){
-    let show;
     try{
-        const res = await fetch(`${api_url}/id/${id}`)
+        const res = await fetch(`${show_api_url}/id/${id}`)
         const data = await res.json();
         return data.data;
     }
     catch{
         console.error(error);
     }
-    return show;
 }
 
 async function displayShow(id){
@@ -55,6 +53,13 @@ async function displayShow(id){
     document.getElementById("show-description").innerHTML = show.description;
     document.getElementById("show-release-date").innerHTML = show.release_date;
     document.getElementById("show-image").src = `/images/show/${show.image}`;
+    let producers = [];
+    show.producer.forEach(producer => {
+        producers.push(producer.producer_name);
+    });
+    console.log(producers);
+    document.getElementById("show-producer").innerHTML = producers.join(' | ');
+    document.getElementById("show-director").innerHTML = show.director;
 }
 
 async function displayUpdateShow(id){
@@ -65,6 +70,14 @@ async function displayUpdateShow(id){
     document.getElementById("show-type").value = show.type;
     document.getElementById("show-release-date").value = show.release_date;
     document.getElementById("show-image").src = `/images/show/${show.image}`;
+    if(show.producer.length > 0)
+    {
+        show.producer.map(producer => {
+            showProducerByShow(producer, show.id);
+        });
+    }
+    await getProducers();
+    await getDirectors();
 }
 
 function redirectShow(id){
@@ -91,7 +104,7 @@ async function updateShow(id, data){
         body: JSON.stringify(params)  
     };
 
-    fetch(`${api_url}/${id}`, options)
+    fetch(`${show_api_url}/${id}`, options)
     .then(res => {
         return res.json();
     }).then(data => {
@@ -123,7 +136,7 @@ async function createShow(data){
         body: JSON.stringify(params)  
     };
 
-    fetch(`${api_url}`, options)
+    fetch(`${show_api_url}`, options)
     .then(res => {
         return res.json();
     }).then(data => {

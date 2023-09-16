@@ -8,6 +8,8 @@ if(!isset($id) || empty($id)){
 <!DOCTYPE html>
 <html lang="fr">
 <head>
+    <script src="/src/includes/js/producer-data.js"></script>
+    <script src="/src/includes/js/director-data.js"></script>
     <?php include_once __DIR__ . "/../includes/head.php" ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -51,6 +53,28 @@ if(!isset($id) || empty($id)){
                             <img src="" id="show-image" class="poster">
                         </div>
                     </div>
+
+                    <div class="col-md-5">
+                        <label for="director" class="form-label">Director</label>
+                        <select class="form-select" id="show-director" name="show-director">
+                        </select>
+                    </div>
+
+                    <div class="col-12"></div>
+
+                    <div class="col-md-5">
+                        <label for="producer" class="form-label">Producer</label>
+                        <select class="form-select" id="show-producer" name="show-producer" onchange="addProducerAsShow(<?php echo $id ?>)">
+                            <option value="">Add...</option>
+                        </select>
+                    </div>
+
+                    <div class="col-12">
+                        <table class="table w-25">
+                            <tbody id="table-producer">
+                            </tbody>
+                        </table>    
+                    </div> 
 
                     <hr class="my-4">
                     <div class="text-center">
