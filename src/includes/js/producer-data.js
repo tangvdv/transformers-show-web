@@ -1,25 +1,49 @@
 const producer_api_url = "http://localhost:3000/producer";
 
-async function getProducers(){
-    await fetch(producer_api_url)
-    .then(res => {
-        return res.json();
-    })
-    .then(data =>{
-        const producerSelect = document.getElementById("show-producer");
-        shows = data.data.map(producer => {
-            producerSelect.innerHTML += `<option value='${producer.id}'>${producer.producer_name}</option>`;
+async function showSelectProducers(producers){
+    let pIds = [];
+    if(producers.length > 0){
+        producers.map(p => {
+            pIds.push(p.id);
         });
-    })
+    }
+    producers = await getProducers();
+    
+    const producerSelect = document.getElementById("show-producer");
+    producerSelect.innerHTML = `<option value="">Add...</option>`;
+    producers.map(producer => {
+        if(!(pIds.includes(producer.id)))
+        {
+            producerSelect.innerHTML += `<option value='${producer.id}'>${producer.producer_name}</option>`;
+        }
+    });
 }
 
-function showProducerByShow(producer, showId){
+async function getProducers(){
+    try{
+        const res = await fetch(`${producer_api_url}`)
+        const data = await res.json();
+        return data.data;
+    }
+    catch (error){
+        console.error(error);
+    }
+}
+
+function showProducerByShow(producers, showId){
     const producerTable = document.getElementById("table-producer");
-    producerTable.innerHTML += 
-    `<tr>
-        <td>${producer.producer_name}</td>
-        <td><button type="button" class="btn btn-danger" onclick="deleteProducerAsShow(${producer.id},${showId})">X</button></td>
-    </tr>`;
+    producerTable.innerHTML = "";
+
+    if(producers.length > 0)
+    {
+        producers.map(producer => {
+            producerTable.innerHTML += 
+            `<tr>
+                <td>${producer.producer_name}</td>
+                <td><button type="button" class="btn btn-danger" onclick="deleteProducerAsShow(${producer.id},${showId})">X</button></td>
+            </tr>`;
+        });
+    }
 }
 
 async function deleteProducerAsShow(producerId, showId){
@@ -31,16 +55,18 @@ async function deleteProducerAsShow(producerId, showId){
         }
     };
 
-    fetch(`${producer_api_url}/${producerId}/${showId}`, options)
-    .then(res => {
-        return res.json();
-    }).then(data => {
+    try{
+        const res = await fetch(`${producer_api_url}/${producerId}/${showId}`, options);
+        const data = await res.json();
         if(data.statusCode === 200){
-            location.reload();
+            show = await getShow(showId);
+            await showSelectProducers(show.producer);
+            showProducerByShow(show.producer, showId);
         }
-    }).catch(function(err) {
-        console.error(err);
-    });
+    }
+    catch (error){
+        console.error(error);
+    }
 }
 
 async function getProducer(id){
@@ -70,12 +96,12 @@ async function addProducerAsShow(showId){
         const res = await fetch(`${producer_api_url}/${producerId}/${showId}`, options);
         const data = await res.json();
         if(data.statusCode === 200){
-            producer = await getProducer(producerId);
-            console.log(producer);
-            showProducerByShow(producer, showId);
+            show = await getShow(showId);
+            await showSelectProducers(show.producer);
+            showProducerByShow(show.producer, showId);
         }
     }
-    catch{
+    catch (error){
         console.error(error);
     }
 }

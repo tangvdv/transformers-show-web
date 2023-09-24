@@ -9,6 +9,7 @@
 <body>
 <?php include_once __DIR__."/../includes/header.php"; ?>
     <main>
+        <a class="m-2 btn btn-primary btn-sm" href="index.php">Back</a>
         <div class="container py-4">
             <form action="createShowController.php" method="POST" enctype="multipart/form-data">
                 <div class="row g-3">

@@ -18,6 +18,7 @@ if(!isset($id) || empty($id)){
 <body onload="displayUpdateShow(<?php echo $id; ?>)">
 <?php include_once __DIR__."/../includes/header.php"; ?>
     <main>
+        <a class="m-2 btn btn-primary btn-sm" href="show.php?id=<?php echo $id ?>">Back</a>
         <div class="container py-4">
             <form action="" id="form" method="POST" enctype="multipart/form-data">
                 <div class="row g-3">
@@ -56,11 +57,17 @@ if(!isset($id) || empty($id)){
 
                     <div class="col-md-5">
                         <label for="director" class="form-label">Director</label>
-                        <select class="form-select" id="show-director" name="show-director">
+                        <select class="form-select" id="show-director" name="show-director" onchange="addDirectorAsShow(<?php echo $id ?>)">
+                            <option value="">Select...</option>
                         </select>
                     </div>
 
-                    <div class="col-12"></div>
+                    <div class="col-12">
+                        <table class="table w-25">
+                            <tbody id="table-director">
+                            </tbody>
+                        </table>    
+                    </div> 
 
                     <div class="col-md-5">
                         <label for="producer" class="form-label">Producer</label>

@@ -8,7 +8,6 @@ async function getShows(){
         const value = e.target.value.toLowerCase();
         shows.forEach(show => {
             const isVisible = show.name.toLowerCase().includes(value);
-            console.log(show.element.classList);
             show.element.classList.toggle("visually-hidden", !isVisible);
         })
     })
@@ -42,7 +41,7 @@ async function getShow(id){
         const data = await res.json();
         return data.data;
     }
-    catch{
+    catch (error){
         console.error(error);
     }
 }
@@ -57,7 +56,6 @@ async function displayShow(id){
     show.producer.forEach(producer => {
         producers.push(producer.producer_name);
     });
-    console.log(producers);
     document.getElementById("show-producer").innerHTML = producers.join(' | ');
     document.getElementById("show-director").innerHTML = show.director;
 }
@@ -70,14 +68,12 @@ async function displayUpdateShow(id){
     document.getElementById("show-type").value = show.type;
     document.getElementById("show-release-date").value = show.release_date;
     document.getElementById("show-image").src = `/images/show/${show.image}`;
-    if(show.producer.length > 0)
-    {
-        show.producer.map(producer => {
-            showProducerByShow(producer, show.id);
-        });
-    }
-    await getProducers();
-    await getDirectors();
+
+    director = await getDirectorByName(show.director);
+    showProducerByShow(show.producer, show.id);
+    await showSelectProducers(show.producer);
+    await showSelectDirectors();
+    document.getElementById("show-director").value = director.id;
 }
 
 function redirectShow(id){
@@ -108,7 +104,6 @@ async function updateShow(id, data){
     .then(res => {
         return res.json();
     }).then(data => {
-        console.log(data);
         if (data.statusCode === 404) {
             window.location.href = `/src/show/updateShow.php?id=${id}&error=${data.error.description}`;
         } else {
@@ -140,7 +135,6 @@ async function createShow(data){
     .then(res => {
         return res.json();
     }).then(data => {
-        console.log(data);
         if (data.statusCode === 404) {
             window.location.href = `/src/show/createShow.php?error=${data.error.description}`;
         } else {
