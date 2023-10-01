@@ -1,3 +1,6 @@
+<?php
+$type = "show";
+?>
 <head>
     <?php include_once __DIR__ . "/../includes/head.php" ?>
     <meta charset="UTF-8">

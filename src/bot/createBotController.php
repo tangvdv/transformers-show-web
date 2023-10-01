@@ -1,5 +1,5 @@
 <?php
-$type = "show";
+$type = "bot";
 ?>
 <head>
     <?php include_once __DIR__ . "/../includes/head.php" ?>
@@ -8,27 +8,25 @@ $type = "show";
 </head>
 <?php
 
-$name = $_POST["show-name"];
-$description = $_POST["show-description"];
-$type = $_POST["show-type"];
-$release_date = $_POST["show-release-date"];
-$image = $_FILES["show-image"];
-$id = $_GET["id"];
-$oldFileName = $_GET["image"];
+$name = $_POST["bot-name"];
+$description = $_POST["bot-description"];
+$faction = $_POST["bot-faction"];
+$image = $_FILES["bot-image"];
 $newFileName = "";
+
+if(!isset($name) || empty($name)){
+    header("location:createBot.php?error=Name field empty");
+    die;
+}
+
+if(!isset($faction) || empty($faction)){
+    header("location:createBot.php?error=Faction field empty");
+    die;
+}
 
 if(isset($image["name"]) && !empty($image["name"])){
     
-    $uploadDir = $_SERVER['DOCUMENT_ROOT']."\images\show\\";
-
-    /*
-    if(isset($oldFileName) && !empty($oldFileName)){
-        $filePathToDelete = $uploadDir . $oldFileName;
-        if(file_exists($filePathToDelete)){
-            unlink($filePathToDelete);
-        }
-    }
-    */
+    $uploadDir = $_SERVER['DOCUMENT_ROOT']."\images\bot\\";
     
     $fileExtension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
 
@@ -45,15 +43,18 @@ if(isset($image["name"]) && !empty($image["name"])){
         }
     }
 }
+else{
+    header("location:createBot.php?error=Image field empty");
+    die;
+}
 
 $data = array(
-    "show_name" => $name,
+    "bot_name" => $name,
     "description" => $description,
-    "type" => (int)$type,
-    "release_date" => $release_date,
+    "faction" => (int)$faction,
     "image" => $newFileName
 );
 
 $data = json_encode($data);
 
-echo "<script type='text/javascript'>updateShow({$id},{$data});</script>";
+echo "<script type='text/javascript'>createBot({$data});</script>";
