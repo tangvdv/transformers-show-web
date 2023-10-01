@@ -11,6 +11,10 @@
     height: 24em;
 }
 
+.alt-poster{
+    aspect-ratio: 2/1;
+}
+
 .poster-div{
     width: 16.12em;
     height:29em;

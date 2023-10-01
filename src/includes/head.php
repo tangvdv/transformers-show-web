@@ -11,6 +11,10 @@
         case "bot":
             echo "<script src='/src/includes/js/bot-data.js'></script>";
             break;
+
+        case "alt":
+            echo "<script src='/src/includes/js/alt-data.js'></script>";
+            break;
     } 
     ?>
 </head>
