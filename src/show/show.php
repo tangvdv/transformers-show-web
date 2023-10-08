@@ -35,6 +35,65 @@ if(!isset($id) || empty($id)){
                 <li class="nav-item d-flex border-start px-4"><p>Director : </p><p class="mx-1" id="show-director"></p></li>
             </ul>
         </div>
+        
+        <div class="d-flex">
+            <div class="text-center list-group w-25 m-4">
+                <p class="">Summary</p>
+                <a href="#bot" class="list-group-item list-group-item-action">Bot</a>
+                <a href="#actor" class="list-group-item list-group-item-action">Actor</a>
+                <a href="#artefact" class="list-group-item list-group-item-action">Artefact</a>
+                <a href="#anecdote" class="list-group-item list-group-item-action">Anecdote</a>
+            </div>
+            <div class="text-center flex-fill m-4">
+                <p>Informations</p>
+            </div>    
+        </div>
+
+        <div class="text-center container my-4" id="bot">
+            <h2>Bot</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Screen time</th>
+                        <th>Voice Actor</th>
+                    </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                    <tr>
+                        <td>
+                            <div>
+                                <div class="my-2">
+                                    <a class="link-offset-2 link-underline link-underline-opacity-0 link-dark" href="/../src/bot/bot.php?id=1">Optimus Prime</a>
+                                </div>
+                                <div>
+                                    <img type="button" onclick="window.location.href='/../src/bot/bot.php?id=1'" class="table-bot-poster" src="/../../images/bot/20231001204906.jpg">
+                                    <img type="button" onclick="window.location.href='/../src/alt/alt.php?id=1'" class="table-alt-poster" src="/../../images/alt/20231001210735.jpg">
+                                </div>
+                            </div>
+                        </td>
+                        <td style="vertical-align: baseline;">xx:xx:xx</td>
+                        <td>
+                            <div class="my-2">
+                                <a class="link-offset-2 link-underline link-underline-opacity-0 link-dark" href="/../src/voiceactor/voiceactor.php?id=1">Petter Cullen</a>
+                            </div>
+                            <div>
+                                <img type="button" onclick="window.location.href='/../src/voiceactor/voiceactor.php?id=1'" class="table-bot-poster" src="/../../images/bot/20231001204906.jpg">
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="text-center my-4" id="actor">
+            <h2>Actor</h2>
+        </div>
+        <div class="text-center my-4" id="artefact">
+            <h2>Artefact</h2>
+        </div>
+        <div class="text-center my-4" id="anecdote">
+            <h2>Anecdote</h2>
+        </div>
     </main>
 </body>
 </html>

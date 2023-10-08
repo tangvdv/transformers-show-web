@@ -11,6 +11,16 @@
     height: 24em;
 }
 
+.table-bot-poster{
+    width: 6em;
+    height: 9em;
+}
+
+.table-alt-poster{
+    width: 13em;
+    height: 9em;
+}
+
 .alt-poster{
     aspect-ratio: 2/1;
 }
