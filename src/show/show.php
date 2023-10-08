@@ -49,41 +49,33 @@ if(!isset($id) || empty($id)){
             </div>    
         </div>
 
-        <div class="text-center container my-4" id="bot">
+        <div class="text-center container w-75 my-4" id="bot">
             <h2>Bot</h2>
-            <table class="table">
+
+            <table class="table shadow-sm">
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Screen time</th>
-                        <th>Voice Actor</th>
+                        <th class="p-2">    
+                            <div class="row justify-content-center text-center">
+                                <div class="col-md-7 themed-grid-col">
+                                    <div class="row">
+                                        <div class="col-md-3 themed-grid-col">Image</div>
+                                        <div class="col-md-3 themed-grid-col">Name</div>
+                                        <div class="col-md-3 themed-grid-col">Faction</div>
+                                        <div class="col-md-3 themed-grid-col">Screen time</div>
+                                    </div>
+                                </div>
+                                <div class="col-md-2 themed-grid-col">Alt mode</div>
+                                <div class="col-md-2 themed-grid-col">Voice actor</div>
+                            </div>
+                        </th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider">
-                    <tr>
-                        <td>
-                            <div>
-                                <div class="my-2">
-                                    <a class="link-offset-2 link-underline link-underline-opacity-0 link-dark" href="/../src/bot/bot.php?id=1">Optimus Prime</a>
-                                </div>
-                                <div>
-                                    <img type="button" onclick="window.location.href='/../src/bot/bot.php?id=1'" class="table-bot-poster" src="/../../images/bot/20231001204906.jpg">
-                                    <img type="button" onclick="window.location.href='/../src/alt/alt.php?id=1'" class="table-alt-poster" src="/../../images/alt/20231001210735.jpg">
-                                </div>
-                            </div>
-                        </td>
-                        <td style="vertical-align: baseline;">xx:xx:xx</td>
-                        <td>
-                            <div class="my-2">
-                                <a class="link-offset-2 link-underline link-underline-opacity-0 link-dark" href="/../src/voiceactor/voiceactor.php?id=1">Petter Cullen</a>
-                            </div>
-                            <div>
-                                <img type="button" onclick="window.location.href='/../src/voiceactor/voiceactor.php?id=1'" class="table-bot-poster" src="/../../images/bot/20231001204906.jpg">
-                            </div>
-                        </td>
-                    </tr>
+                <tbody class="table-group-divider" id="skin-table">
                 </tbody>
+
             </table>
+
         </div>
         <div class="text-center my-4" id="actor">
             <h2>Actor</h2>

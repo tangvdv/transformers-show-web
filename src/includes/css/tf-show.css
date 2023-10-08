@@ -12,13 +12,8 @@
 }
 
 .table-bot-poster{
-    width: 6em;
-    height: 9em;
-}
-
-.table-alt-poster{
-    width: 13em;
-    height: 9em;
+    width: 4em;
+    height: 6em;
 }
 
 .alt-poster{
@@ -28,4 +23,16 @@
 .poster-div{
     width: 16.12em;
     height:29em;
+}
+
+.div-bot-table:hover{
+    background-color: rgba(147,33,33, .8);
+}
+
+.div-alt-table:hover{
+    background-color: rgba(6, 91, 229, 0.8);
+}
+
+.div-va-table:hover{
+    background-color: rgba(0, 125, 29, .8);
 }
