@@ -22,30 +22,29 @@ if(!isset($id) || empty($id)){
             <div class="row">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light" id="show-name"></h1>
-                    <img class="poster" id="show-image">
-                    <hr>
+                    <img class="poster my-4" id="show-image">
                 </div>
+                <hr>
             </div>
-            <p id="show-description"></p>
-        </div>
-        <div class="d-flex justify-content-center py-3">
-            <ul class="nav nav-pills">
-                <li class="nav-item d-flex border-end px-4"><p>Release date : </p><p class="mx-1" id="show-release-date"></p></li>
-                <li class="nav-item d-flex border-end border-start px-4"><p>Producer : </p><p class="mx-1" id="show-producer"></p></li>
-                <li class="nav-item d-flex border-start px-4"><p>Director : </p><p class="mx-1" id="show-director"></p></li>
-            </ul>
         </div>
         
         <div class="d-flex">
             <div class="text-center list-group w-25 m-4">
-                <p class="">Summary</p>
+                <p class=""><b>Summary</b></p>
                 <a href="#bot" class="list-group-item list-group-item-action">Bot</a>
                 <a href="#actor" class="list-group-item list-group-item-action">Actor</a>
                 <a href="#artefact" class="list-group-item list-group-item-action">Artefact</a>
                 <a href="#anecdote" class="list-group-item list-group-item-action">Anecdote</a>
             </div>
             <div class="text-center flex-fill m-4">
-                <p>Informations</p>
+                <p><b>Informations</b></p>
+                <ul class="nav flex-column border rounded">
+                    <li class="my-4"><p class="m-0" id="show-description"></p></li>
+                    <hr>
+                    <li class="nav-item d-flex  px-4 "><p>Release date : </p><p class="mx-1" id="show-release-date"></p></li>
+                    <li class="nav-item d-flex  px-4 "><p>Producer : </p><p class="mx-1" id="show-producer"></p></li>
+                    <li class="nav-item d-flex  px-4 "><p>Director : </p><p class="mx-1" id="show-director"></p></li>
+                </ul>
             </div>    
         </div>
 
