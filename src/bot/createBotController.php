@@ -34,12 +34,19 @@ if(isset($image["name"]) && !empty($image["name"])){
 
     $uploadPath = $uploadDir . $newFileName;
 
+    if(!isset($image["tmp_name"])){
+        header("location:createBot.php?error=Cannot retrieve the image.");
+        die;
+    }
+
     $isImage = getimagesize($image["tmp_name"]);
     if (!$isImage) {
-        echo "Error: The uploaded file is not an image.";
+        header("location:createBot.php?error=The uploaded file is not an image.");
+        die;
     } else {
         if (!move_uploaded_file($image["tmp_name"], $uploadPath)) {
-            echo "Error: There was a problem uploading the file.";
+            header("location:createBot.php?error=There was a problem uploading the file.");
+            die;
         }
     }
 }

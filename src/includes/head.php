@@ -15,6 +15,9 @@
         case "alt":
             echo "<script src='/src/includes/js/alt-data.js'></script>";
             break;
+        case "actor":
+            echo "<script src='/src/includes/js/actor-data.js'></script>";
+            break;
     } 
     ?>
 </head>

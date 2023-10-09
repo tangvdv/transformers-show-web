@@ -11,6 +11,21 @@
     height: 24em;
 }
 
+.poster-div{
+    width: 16.12em;
+    height:29em;
+}
+
+.actor-poster{
+    width: 15em;
+    height: 20em;
+}
+
+.actor-poster-div{
+    width: 15.11em;
+    height: 25em;
+}
+
 .table-bot-poster{
     width: 4em;
     height: 6em;
@@ -18,11 +33,6 @@
 
 .alt-poster{
     aspect-ratio: 2/1;
-}
-
-.poster-div{
-    width: 16.12em;
-    height:29em;
 }
 
 .div-bot-table:hover{

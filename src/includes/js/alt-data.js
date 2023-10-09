@@ -58,7 +58,7 @@ async function displayUpdateAlt(id){
     document.getElementById("form").action = `updateAltController.php?id=${id}&image=${alt.image}`;
     document.getElementById("alt-name").value = alt.alt_name;
     console.log(alt.brand);
-    document.getElementById("alt-brand").innerHTML = alt.brand;
+    document.getElementById("alt-brand").value = alt.brand;
     document.getElementById("alt-image").src = `/images/alt/${alt.image}`;
 }
 

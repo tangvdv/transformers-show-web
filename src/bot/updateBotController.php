@@ -19,15 +19,6 @@ $newFileName = "";
 if(isset($image["name"]) && !empty($image["name"])){
     
     $uploadDir = $_SERVER['DOCUMENT_ROOT']."\images\bot\\";
-
-    /*
-    if(isset($oldFileName) && !empty($oldFileName)){
-        $filePathToDelete = $uploadDir . $oldFileName;
-        if(file_exists($filePathToDelete)){
-            unlink($filePathToDelete);
-        }
-    }
-    */
     
     $fileExtension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
 
@@ -35,12 +26,19 @@ if(isset($image["name"]) && !empty($image["name"])){
 
     $uploadPath = $uploadDir . $newFileName;
 
+    if(!isset($image["tmp_name"])){
+        header("location:updateBot.php?error=Cannot retrieve the image.");
+        die;
+    }
+
     $isImage = getimagesize($image["tmp_name"]);
     if (!$isImage) {
-        echo "Error: The uploaded file is not an image.";
+        header("location:updateBot.php?error=The uploaded file is not an image.");
+        die;
     } else {
         if (!move_uploaded_file($image["tmp_name"], $uploadPath)) {
-            echo "Error: There was a problem uploading the file.";
+            header("location:updateBot.php?error=There was a problem uploading the file.");
+            die;
         }
     }
 }
