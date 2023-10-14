@@ -1,5 +1,5 @@
 <?php
-$type = "show";
+$type = ["show"];
 ?>
 <head>
     <?php include_once __DIR__ . "/../includes/head.php" ?>

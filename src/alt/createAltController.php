@@ -1,5 +1,5 @@
 <?php
-$type = "alt";
+$type = ["alt"];
 ?>
 <head>
     <?php include_once __DIR__ . "/../includes/head.php" ?>

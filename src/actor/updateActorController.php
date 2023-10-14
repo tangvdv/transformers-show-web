@@ -1,5 +1,5 @@
 <?php
-$type = "actor";
+$type = ["actor"];
 ?>
 <head>
     <?php include_once __DIR__ . "/../includes/head.php" ?>

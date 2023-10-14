@@ -1,5 +1,5 @@
 <?php
-$type = "actor";
+$type = ["actor"];
 ?>
 <!DOCTYPE html>
 <html lang="fr">

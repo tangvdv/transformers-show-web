@@ -1,5 +1,5 @@
 <?php
-$type = "alt";
+$type = ["alt"];
 $id = $_GET['id'];
 if(!isset($id) || empty($id)){
     header("Location:index.php");

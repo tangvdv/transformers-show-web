@@ -1,5 +1,5 @@
 <?php
-$type = "alt";
+$type = ["alt"];
 ?>
 <!DOCTYPE html>
 <html lang="fr">

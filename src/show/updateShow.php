@@ -1,5 +1,5 @@
 <?php
-$type = "show";
+$type = ["show"];
 $id = $_GET['id'];
 if(!isset($id) || empty($id)){
     header("Location:index.php");

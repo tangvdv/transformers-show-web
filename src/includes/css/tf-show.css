@@ -10,20 +10,43 @@
     width: 16em;
     height: 24em;
 }
-
 .poster-div{
     width: 16.12em;
     height:29em;
 }
 
-.actor-poster{
+
+.actor-poster-regular{
     width: 15em;
     height: 20em;
 }
-
-.actor-poster-div{
+.actor-poster-div-regular{
     width: 15.11em;
     height: 25em;
+}
+.actor-poster-name-regular{
+    font-size: large;
+    font-weight: bold;
+    padding-top: 1em;
+}
+.actor-poster-character-regular{
+    font-size: small;
+}
+
+.actor-poster-small{
+    width: 9em;
+    height: 12em;
+}
+.actor-poster-div-small{
+    width: 9.11em;
+    height: 16em;
+}
+.actor-poster-name-small{
+    font-size: medium;
+    font-weight: bold;
+}
+.actor-poster-character-small{
+    font-size: small;
 }
 
 .table-bot-poster{

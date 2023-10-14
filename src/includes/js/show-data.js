@@ -71,6 +71,7 @@ async function displayShow(id){
     show = await getShow(id);
     displayShowInformations(show);
     await displayShowSkinsTable(show);
+    await getActorsByShow(id);
 }
 
 function displayShowInformations(data){

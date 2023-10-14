@@ -1,5 +1,5 @@
 <?php
-$type = "show";
+$type = ["show"];
 ?>
 <!DOCTYPE html>
 <html lang="fr">

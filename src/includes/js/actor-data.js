@@ -19,21 +19,39 @@ async function getActors(){
     .then(data =>{
         const actorContainer = document.getElementById("actor-container");
         actors = data.data.map(actor => {
-            const div = document.createElement("div");
-            div.classList.add("col-md-3", "col-sm-1");
-            div.id = actor.id;
-            div.innerHTML = 
-            `<div type="button" class="actor-poster-div card shadow-sm" onclick="window.location.href='/src/actor/actor.php?id=${actor.id}';">
-                <img class="actor-poster rounded-2" src="/images/actor/${actor.image}">
-                <div class="card-body">
-                    <p class="card-text text-center fs-5 m-0">${actor.actor_name}</p>
-                    <p class="card-text text-center" style="font-size: small;"><em>${actor.character}</em></p>
-                </div>
-            </div>`;
-            actorContainer.append(div);
-            return { name: actor.actor_name, element: div };
+            return createActorDiv(actor, actorContainer, "regular");
         });
     })
+}
+
+async function getActorsByShow(showId){
+    await fetch(`${actor_api_url}/${showId}`)
+    .then(res => {
+        return res.json();
+    })
+    .then(data =>{
+        const actorContainer = document.getElementById("actor-container");
+        actors = data.data.map(actor => {
+            console.log(actor);
+            return createActorDiv(actor, actorContainer, "small");
+        });
+    })
+}
+
+function createActorDiv(actor, actorContainer, containerSize){
+    const div = document.createElement("div");
+    div.classList.add("col-md-3", "col-sm-1");
+    div.id = actor.id;
+    div.innerHTML = 
+    `<div type="button" class="actor-poster-div-${containerSize} card shadow-sm" onclick="window.location.href='/src/actor/actor.php?id=${actor.id}';">
+        <img class="actor-poster-${containerSize} rounded-2" src="/images/actor/${actor.image}">
+        <div class="card-body p-1">
+            <p class="card-text text-center m-0 actor-poster-name-${containerSize}">${actor.actor_name}</p>
+            <p class="card-text text-center actor-poster-character-${containerSize}" style="font-size: small;"><em>${actor.character}</em></p>
+        </div>
+    </div>`;
+    actorContainer.append(div);
+    return { name: actor.actor_name, element: div };
 }
 
 async function getActor(id){
@@ -49,6 +67,7 @@ async function getActor(id){
 
 async function displayActor(id){
     actor = await getActor(id);
+    console.log(actor);
     document.getElementById("actor-name").innerHTML = actor.actor_name;
     document.getElementById("actor-character").innerHTML = actor.character;
     document.getElementById("actor-image").src = `/images/actor/${actor.image}`;

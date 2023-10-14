@@ -1,5 +1,5 @@
 <?php
-$type = "actor";
+$type = ["actor"];
 $id = $_GET['id'];
 if(!isset($id) || empty($id)){
     header("Location:index.php");
@@ -22,7 +22,7 @@ if(!isset($id) || empty($id)){
             <div class="row">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light" id="actor-name"></h1>
-                    <img class="actor-poster" id="actor-image">
+                    <img class="actor-poster-regular" id="actor-image">
                     <hr>
                 </div>
             </div>

@@ -1,5 +1,5 @@
 <?php
-$type = "bot";
+$type = ["bot"];
 ?>
 <!DOCTYPE html>
 <html lang="fr">

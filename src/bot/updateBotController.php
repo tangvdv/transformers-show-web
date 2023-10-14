@@ -1,5 +1,5 @@
 <?php
-$type = "bot";
+$type = ["bot"];
 ?>
 <head>
     <?php include_once __DIR__ . "/../includes/head.php" ?>
