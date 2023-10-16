@@ -18,6 +18,9 @@
                 case "actor":
                     echo "<script src='/src/includes/js/actor-data.js'></script>";
                     break;
+                case "voiceactor":
+                    echo "<script src='/src/includes/js/voiceactor-data.js'></script>";
+                    break;
             } 
         }
     }
