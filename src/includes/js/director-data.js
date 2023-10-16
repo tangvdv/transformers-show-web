@@ -31,7 +31,7 @@ async function getDirectorByName(directorName){
     }
 }
 
-async function addDirectorAsShow(showId){
+async function addDirectorHasShow(showId){
     const directorSelect = document.getElementById("show-director");
     directorId = directorSelect.options[directorSelect.selectedIndex].value;
 

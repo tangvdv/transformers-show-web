@@ -9,7 +9,7 @@ $type = ["voiceactor"];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Voice actors</title>
 </head>
-<body onload="getVoiceActors()">
+<body onload="voiceActorIndexManager()">
 <?php include_once __DIR__."/../includes/header.php"; ?>
     <main>
     <button type="button" class="btn btn-success m-2" onclick="window.location.href=`/src/voiceactor/createVoiceActor.php`;">Create</button>

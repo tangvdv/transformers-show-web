@@ -1,6 +1,17 @@
 const alt_api_url = "http://localhost:3000/alt";
 
 async function getAlts(){
+    try{
+        const res = await fetch(`${alt_api_url}`)
+        const data = await res.json();
+        return data.data;
+    }
+    catch (error){
+        console.error(error);
+    }
+}
+
+async function altIndexManager(){
     let alts = [];
 
     const alt_search = document.querySelector('input[type=search]');
@@ -12,27 +23,23 @@ async function getAlts(){
         })
     })
 
-    await fetch(alt_api_url)
-    .then(res => {
-        return res.json();
-    })
-    .then(data =>{
-        const altContainer = document.getElementById("alt-container");
-        alts = data.data.map(alt => {
-            const div = document.createElement("div");
-            div.classList.add("col-md-3", "col-sm-1");
-            div.id = alt.id;
-            div.innerHTML = 
-            `<div type="button" class="alt-poster card shadow-sm" onclick="window.location.href='/src/alt/alt.php?id=${alt.id}';">
-                <img class="alt-poster rounded-2" src="/images/alt/${alt.image}">
-                <div class="card-body">
-                    <p class="card-text text-center fs-5">${alt.alt_name}</p>
-                </div>
-            </div>`;
-            altContainer.append(div);
-            return { name: alt.alt_name, element: div };
-        });
-    })
+    data = await getAlts();
+
+    const altContainer = document.getElementById("alt-container");
+    alts = data.map(alt => {
+        const div = document.createElement("div");
+        div.classList.add("col-md-3", "col-sm-1");
+        div.id = alt.id;
+        div.innerHTML = 
+        `<div type="button" class="alt-poster-div card shadow-sm" onclick="window.location.href='/src/alt/alt.php?id=${alt.id}';">
+            <img class="alt-poster rounded-2" src="/images/alt/${alt.image}">
+            <div class="card-body">
+                <p class="card-text text-center fs-5">${alt.alt_name}</p>
+            </div>
+        </div>`;
+        altContainer.append(div);
+        return { name: alt.alt_name, element: div };
+    });
 }
 
 async function getAlt(id){

@@ -1,6 +1,17 @@
 const voiceactor_api_url = "http://localhost:3000/voiceactor";
 
 async function getVoiceActors(){
+    try{
+        const res = await fetch(`${voiceactor_api_url}`)
+        const data = await res.json();
+        return data.data;
+    }
+    catch (error){
+        console.error(error);
+    }
+}
+
+async function voiceActorIndexManager(){
     let voiceactors = [];
 
     const voiceactor_search = document.querySelector('input[type=search]');
@@ -12,16 +23,12 @@ async function getVoiceActors(){
         })
     })
 
-    await fetch(voiceactor_api_url)
-    .then(res => {
-        return res.json();
-    })
-    .then(data =>{
-        const voiceactorContainer = document.getElementById("voiceactor-container");
-        voiceactors = data.data.map(voiceactor => {
-            return createVoiceActorDiv(voiceactor, voiceactorContainer, "regular");
-        });
-    })
+    data = await getVoiceActors();
+
+    const voiceactorContainer = document.getElementById("voiceactor-container");
+    voiceactors = data.map(voiceactor => {
+        return createVoiceActorDiv(voiceactor, voiceactorContainer, "regular");
+    });
 }
 
 async function getVoiceActorsByShow(showId){
@@ -46,7 +53,7 @@ function createVoiceActorDiv(voiceactor, voiceactorContainer, containerSize){
     `<div type="button" class="voiceactor-poster-div-${containerSize} card shadow-sm" onclick="window.location.href='/src/voiceactor/voiceactor.php?id=${voiceactor.id}';">
         <img class="voiceactor-poster-${containerSize} rounded-2" src="/images/voiceactor/${voiceactor.image}">
         <div class="card-body p-1">
-            <p class="card-text text-center m-0 voiceactor-poster-name-${containerSize}">${voiceactor.voiceactor_name}</p>
+            <p class="card-text text-center p-2">${voiceactor.voiceactor_name}</p>
         </div>
     </div>`;
     voiceactorContainer.append(div);
@@ -144,6 +151,27 @@ async function createVoiceActor(data){
         } else {
             window.location.href = `/src/voiceactor/index.php`;
         }
+    }).catch(function(err) {
+        console.error(err);
+    });
+}
+
+async function addVoiceActorHasSkin(voiceactorId, skinId){
+    const options = {
+        method: 'POST',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
+    };
+
+    fetch(`${skin_api_url}/${voiceactorId}/${skinId}`, options)
+    .then(res => {
+        return res.json();
+    }).then(data => {
+        if (data.statusCode === 404) {
+            //ERROR
+        } 
     }).catch(function(err) {
         console.error(err);
     });

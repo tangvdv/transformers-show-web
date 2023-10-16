@@ -1,6 +1,17 @@
 const actor_api_url = "http://localhost:3000/actor";
 
 async function getActors(){
+    try{
+        const res = await fetch(`${actor_api_url}`)
+        const data = await res.json();
+        return data.data;
+    }
+    catch (error){
+        console.error(error);
+    }
+}
+
+async function actorIndexManager(){
     let actors = [];
 
     const actor_search = document.querySelector('input[type=search]');
@@ -12,27 +23,21 @@ async function getActors(){
         })
     })
 
-    await fetch(actor_api_url)
-    .then(res => {
-        return res.json();
-    })
-    .then(data =>{
-        const actorContainer = document.getElementById("actor-container");
-        actors = data.data.map(actor => {
-            return createActorDiv(actor, actorContainer, "regular");
-        });
-    })
+    data = await getActors();
+    const actorContainer = document.getElementById("actor-container");
+    actors = data.map(actor => {
+        return createActorDiv(actor, actorContainer, "regular");
+    });
 }
 
 async function getActorsByShow(showId){
-    await fetch(`${actor_api_url}/${showId}`)
+    await fetch(`${actor_api_url}/show/${showId}`)
     .then(res => {
         return res.json();
     })
     .then(data =>{
         const actorContainer = document.getElementById("actor-container");
-        actors = data.data.map(actor => {
-            console.log(actor);
+        data.data.map(actor => {
             return createActorDiv(actor, actorContainer, "small");
         });
     })
@@ -149,4 +154,89 @@ async function createActor(data){
     }).catch(function(err) {
         console.error(err);
     });
+}
+
+async function addActorHasShow(showId){
+    const actorSelect = document.getElementById("show-actor");
+    actorId = actorSelect.options[actorSelect.selectedIndex].value;
+
+    const options = {
+        method: 'POST',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
+    };
+
+    try{
+        const res = await fetch(`${actor_api_url}/${actorId}/${showId}`, options);
+        const data = await res.json();
+        if(data.statusCode === 200){
+            show = await getShow(showId);
+            await showSelectActors(show.actor);
+            showActorByShow(show.actor, showId);
+        }
+    }
+    catch (error){
+        console.error(error);
+    }
+}
+
+async function deleteActorHasShow(actorId, showId){
+    const options = {
+        method: 'DELETE',
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json",
+        }
+    };
+
+    try{
+        const res = await fetch(`${actor_api_url}/${actorId}/${showId}`, options);
+        const data = await res.json();
+        if(data.statusCode === 200){
+            show = await getShow(showId);
+            await showSelectActors(show.actor);
+            showActorByShow(show.actor, showId);
+        }
+    }
+    catch (error){
+        console.error(error);
+    }
+}
+
+async function showSelectActors(actors){
+    let aIds = [];
+    if(actors.length > 0){
+        actors.map(a => {
+            aIds.push(a.id);
+        });
+    }
+    actors = await getActors();
+    
+    const actorSelect = document.getElementById("show-actor");
+    actorSelect.innerHTML = `<option value="">Add...</option>`;
+    actors.map(actor => {
+        if(!(aIds.includes(actor.id)))
+        {
+            actorSelect.innerHTML += `<option value='${actor.id}'>${actor.actor_name}</option>`;
+        }
+    });
+}
+
+function showActorByShow(actors, showId){
+    const actorTable = document.getElementById("table-actor");
+    actorTable.innerHTML = "";
+
+    if(actors.length > 0)
+    {
+        actors.map(actor => {
+            actorTable.innerHTML += 
+            `<tr>
+                <td>${actor.actor_name}</td>
+                <td>${actor.character}</td>
+                <td><button type="button" class="btn btn-danger" onclick="deleteActorHasShow(${actor.id},${showId})">X</button></td>
+            </tr>`;
+        });
+    }
 }

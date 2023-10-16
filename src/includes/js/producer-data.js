@@ -40,13 +40,13 @@ function showProducerByShow(producers, showId){
             producerTable.innerHTML += 
             `<tr>
                 <td>${producer.producer_name}</td>
-                <td><button type="button" class="btn btn-danger" onclick="deleteProducerAsShow(${producer.id},${showId})">X</button></td>
+                <td><button type="button" class="btn btn-danger" onclick="deleteProducerHasShow(${producer.id},${showId})">X</button></td>
             </tr>`;
         });
     }
 }
 
-async function deleteProducerAsShow(producerId, showId){
+async function deleteProducerHasShow(producerId, showId){
     const options = {
         method: 'DELETE',
         headers: {
@@ -80,7 +80,7 @@ async function getProducer(id){
     }
 }
 
-async function addProducerAsShow(showId){
+async function addProducerHasShow(showId){
     const producerSelect = document.getElementById("show-producer");
     producerId = producerSelect.options[producerSelect.selectedIndex].value;
 

@@ -1,14 +1,4 @@
 const show_api_url = "http://localhost:3000/show";
-const skin_api_url= "http://localhost:3000/skin";
-
-const factionArray = {
-    1 : "Autobot",
-    2 : "Decepticon",
-    3 : "Maximal",
-    4 : "Predacon",
-    5 : "Terrorcon"
-}
-
 
 async function getShows(){
     let shows = [];
@@ -45,17 +35,6 @@ async function getShows(){
     })
 }
 
-async function getSkins(){
-    try{
-        const res = await fetch(`${skin_api_url}`)
-        const data = await res.json();
-        return data.data;
-    }
-    catch (error){
-        console.error(error);
-    }
-}
-
 async function getShow(id){
     try{
         const res = await fetch(`${show_api_url}/id/${id}`)
@@ -87,43 +66,6 @@ function displayShowInformations(data){
     document.getElementById("show-director").innerHTML = show.director;
 }
 
-function secondsToHMS(seconds) {
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    const remainingSeconds = Math.floor(seconds % 60);
-  
-    const formattedHours = String(hours).padStart(2, '0');
-    const formattedMinutes = String(minutes).padStart(2, '0');
-    const formattedSeconds = String(remainingSeconds).padStart(2, '0');
-  
-    return `${formattedHours}:${formattedMinutes}:${formattedSeconds}`;
-}
-
-async function displayShowSkinsTable(data){
-    skins = await getSkins();
-    let tbody = document.getElementById("skin-table");
-    skins.forEach(skin => {
-        tbody.innerHTML += 
-        `<tr>
-            <td class="p-0">
-                <div class="row justify-content-center text-center px-3" style="vertical-align: middle">
-                    <div class="div-bot-table col-md-7 themed-grid-col py-2" type="button" onclick="window.location.href='/../src/bot/bot.php?id=${skin.bot.id}';">
-                        <div class="row align-items-center">
-                            <div class="col-md-3 themed-grid-col"><img src="/images/skin/${skin.image}" class="table-bot-poster"></div>
-                            <div class="col-md-3 themed-grid-col">${skin.bot.bot_name}</div>
-                            <div class="col-md-3 themed-grid-col">${factionArray[skin.bot.faction]}</div>
-                            <div class="col-md-3 themed-grid-col">${secondsToHMS(skin.screen_time)}</div>
-                        </div>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-center div-alt-table col-md-2 themed-grid-col py-2" type="button" onclick="window.location.href='/../src/alt/alt.php?id=${skin.alt.id}';">${skin.alt.alt_name}</div>
-                    <div class="d-flex align-items-center justify-content-center div-va-table col-md-2 themed-grid-col py-2" type="button" onclick="window.location.href='/../src/voiceactor/voiceactor.php?id=1';">Petter Cullen</div>
-                </div>
-            </td>
-        </tr>
-        `;
-    });
-}
-
 async function displayUpdateShow(id){
     show = await getShow(id);
     document.getElementById("form").action = `updateShowController.php?id=${id}&image=${show.image}`;
@@ -133,11 +75,18 @@ async function displayUpdateShow(id){
     document.getElementById("show-release-date").value = show.release_date;
     document.getElementById("show-image").src = `/images/show/${show.image}`;
 
-    director = await getDirectorByName(show.director);
     showProducerByShow(show.producer, show.id);
     await showSelectProducers(show.producer);
+
     await showSelectDirectors();
-    document.getElementById("show-director").value = director.id;
+    if(show.director.id) document.getElementById("show-director").value = show.director.id;
+
+    showActorByShow(show.actor, show.id);
+    await showSelectActors(show.actor);
+    if(show.actor.id) document.getElementById("show-actor").value = show.actor.id;
+
+    showSkinByShow(show.id);
+    await showSelectSkins();
 }
 
 function redirectShow(id){

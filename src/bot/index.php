@@ -10,7 +10,7 @@ $type = ["bot"];
     <script src="/src/includes/js/bot-data.js"></script>
     <title>Bots</title>
 </head>
-<body onload="getBots()">
+<body onload="altIndexManager()">
 <?php include_once __DIR__."/../includes/header.php"; ?>
     <main>
     <button type="button" class="btn btn-success m-2" onclick="window.location.href=`/src/bot/createBot.php`;">Create</button>

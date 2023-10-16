@@ -1,14 +1,17 @@
 const bot_api_url = "http://localhost:3000/bot";
 
-const factionArray = {
-    1 : "Autobot",
-    2 : "Decepticon",
-    3 : "Maximal",
-    4 : "Predacon",
-    5 : "Terrorcon"
+async function getBots(){
+    try{
+        const res = await fetch(`${bot_api_url}`)
+        const data = await res.json();
+        return data.data;
+    }
+    catch (error){
+        console.error(error);
+    }
 }
 
-async function getBots(){
+async function botIndexManager(){
     let bots = [];
 
     const bot_search = document.querySelector('input[type=search]');
@@ -20,27 +23,23 @@ async function getBots(){
         })
     })
 
-    await fetch(bot_api_url)
-    .then(res => {
-        return res.json();
-    })
-    .then(data =>{
-        const botContainer = document.getElementById("bot-container");
-        bots = data.data.map(bot => {
-            const div = document.createElement("div");
-            div.classList.add("col-md-3", "col-sm-1");
-            div.id = bot.id;
-            div.innerHTML = 
-            `<div type="button" class="poster-div card shadow-sm" onclick="window.location.href='/src/bot/bot.php?id=${bot.id}';">
-                <img class="poster rounded-2" src="/images/bot/${bot.image}">
-                <div class="card-body">
-                    <p class="card-text text-center fs-5">${bot.bot_name}</p>
-                </div>
-            </div>`;
-            botContainer.append(div);
-            return { name: bot.bot_name, element: div };
-        });
-    })
+    data = await getBots();
+
+    const botContainer = document.getElementById("bot-container");
+    bots = data.map(bot => {
+        const div = document.createElement("div");
+        div.classList.add("col-md-3", "col-sm-1");
+        div.id = bot.id;
+        div.innerHTML = 
+        `<div type="button" class="poster-div card shadow-sm" onclick="window.location.href='/src/bot/bot.php?id=${bot.id}';">
+            <img class="poster rounded-2" src="/images/bot/${bot.image}">
+            <div class="card-body">
+                <p class="card-text text-center fs-5">${bot.bot_name}</p>
+            </div>
+        </div>`;
+        botContainer.append(div);
+        return { name: bot.bot_name, element: div };
+    });
 }
 
 async function getBot(id){

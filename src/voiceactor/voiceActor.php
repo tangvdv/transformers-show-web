@@ -22,7 +22,7 @@ if(!isset($id) || empty($id)){
             <div class="row">
                 <div class="col-lg-6 col-md-8 mx-auto">
                     <h1 class="fw-light" id="voiceactor-name"></h1>
-                    <img class="voice-actor-poster-regular" id="voiceactor-image">
+                    <img id="voiceactor-image">
                     <hr>
                 </div>
             </div>

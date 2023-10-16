@@ -7,10 +7,9 @@ $type = ["actor"];
     <?php include_once __DIR__ . "/../includes/head.php" ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="/src/includes/js/actor-data.js"></script>
     <title>Actors</title>
 </head>
-<body onload="getActors()">
+<body onload="actorIndexManager()">
 <?php include_once __DIR__."/../includes/header.php"; ?>
     <main>
     <button type="button" class="btn btn-success m-2" onclick="window.location.href=`/src/actor/createActor.php`;">Create</button>

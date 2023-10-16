@@ -1,5 +1,5 @@
 <?php
-$type = ["show", "actor"];
+$type = ["show", "actor", "skin"];
 $id = $_GET['id'];
 if(!isset($id) || empty($id)){
     header("Location:index.php");
@@ -48,7 +48,7 @@ if(!isset($id) || empty($id)){
             </div>    
         </div>
         <div class="container">
-            <div class="text-center w-75 my-4" id="bot">
+            <div class="text-center my-4" id="bot">
                 <h2>Bot</h2>
 
                 <table class="table shadow-sm">

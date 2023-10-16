@@ -10,7 +10,7 @@ $type = ["alt"];
     <script src="/src/includes/js/alt-data.js"></script>
     <title>Alts</title>
 </head>
-<body onload="getAlts()">
+<body onload="altIndexManager()">
 <?php include_once __DIR__."/../includes/header.php"; ?>
     <main>
     <button type="button" class="btn btn-success m-2" onclick="window.location.href=`/src/alt/createAlt.php`;">Create</button>
