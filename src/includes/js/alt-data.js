@@ -18,7 +18,7 @@ async function altIndexManager(){
     alt_search.addEventListener("input", e =>{
         const value = e.target.value.toLowerCase();
         alts.forEach(alt => {
-            const isVisible = alt.name.toLowerCase().includes(value);
+            const isVisible = (alt.name.toLowerCase().includes(value) || alt.brand.toLowerCase().includes(value));
             alt.element.classList.toggle("visually-hidden", !isVisible);
         })
     })
@@ -38,7 +38,7 @@ async function altIndexManager(){
             </div>
         </div>`;
         altContainer.append(div);
-        return { name: alt.alt_name, element: div };
+        return { name: alt.alt_name, brand: alt.brand, element: div };
     });
 }
 

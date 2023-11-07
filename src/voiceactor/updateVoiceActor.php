@@ -34,6 +34,10 @@ if(!isset($id) || empty($id)){
                         <option value="0">Choose...</option>
                         <option value="1">American</option>
                         <option value="2">English</option>
+                        <option value="3">Japanese</option>
+                        <option value="4">German</option>
+                        <option value="5">Spanish</option>
+                        <option value="6">French</option>
                     </select>
                     </div>
 
@@ -45,6 +49,10 @@ if(!isset($id) || empty($id)){
                         <option value="0">Choose...</option>
                         <option value="1">America</option>
                         <option value="2">England</option>
+                        <option value="3">Japan</option>
+                        <option value="4">Germany</option>
+                        <option value="5">Spain</option>
+                        <option value="6">France</option>
                     </select>
                     </div>
 

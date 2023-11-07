@@ -19,8 +19,8 @@ if(!isset($name) || empty($name)){
     die;
 }
 
-if(!isset($character) || empty($character)){
-    header("location:createVoiceActor.php?error=Character field empty");
+if(!isset($dubb) || empty($dubb)){
+    header("location:createVoiceActor.php?error=Dubb field empty");
     die;
 }
 
@@ -31,7 +31,7 @@ if(!isset($origin) || empty($origin)){
 
 if(isset($image["name"]) && !empty($image["name"])){
     
-    $uploadDir = $_SERVER['DOCUMENT_ROOT']."\images\voiceactor\\";
+    $uploadDir = $_SERVER['DOCUMENT_ROOT']."\images\\voiceactor\\";
     
     $fileExtension = strtolower(pathinfo($image["name"], PATHINFO_EXTENSION));
 

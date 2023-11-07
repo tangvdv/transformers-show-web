@@ -19,11 +19,6 @@ if(!isset($name) || empty($name)){
     die;
 }
 
-if(!isset($faction) || empty($faction)){
-    header("location:createBot.php?error=Faction field empty");
-    die;
-}
-
 if(isset($image["name"]) && !empty($image["name"])){
     
     $uploadDir = $_SERVER['DOCUMENT_ROOT']."\images\bot\\";
