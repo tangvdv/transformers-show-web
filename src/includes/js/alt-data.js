@@ -57,6 +57,7 @@ async function displayAlt(id){
     alt = await getAlt(id);
     document.getElementById("alt-name").innerHTML = alt.alt_name;
     document.getElementById("alt-brand").innerHTML = alt.brand;
+    document.getElementById("alt-year").innerHTML = alt.model_year;
     document.getElementById("alt-image").src = `/images/alt/${alt.image}`;
 }
 
@@ -66,6 +67,7 @@ async function displayUpdateAlt(id){
     document.getElementById("alt-name").value = alt.alt_name;
     console.log(alt.brand);
     document.getElementById("alt-brand").value = alt.brand;
+    document.getElementById("alt-year").value = alt.model_year;
     document.getElementById("alt-image").src = `/images/alt/${alt.image}`;
 }
 

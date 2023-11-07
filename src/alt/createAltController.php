@@ -10,16 +10,12 @@ $type = ["alt"];
 
 $name = $_POST["alt-name"];
 $brand = $_POST["alt-brand"];
+$year = $_POST["alt-year"];
 $image = $_FILES["alt-image"];
 $newFileName = "";
 
 if(!isset($name) || empty($name)){
     header("location:createAlt.php?error=Name field empty");
-    die;
-}
-
-if(!isset($brand) || empty($brand)){
-    header("location:createAlt.php?error=Brand field empty");
     die;
 }
 
@@ -57,6 +53,7 @@ else{
 $data = array(
     "alt_name" => $name,
     "brand" => $brand,
+    "model_year" => $year,
     "image" => $newFileName
 );
 

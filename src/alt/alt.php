@@ -31,6 +31,7 @@ if(!isset($id) || empty($id)){
         <div class="d-flex justify-content-center py-3">
             <ul class="nav nav-pills">
                 <li class="nav-item d-flex px-4"><p>Brand : </p><p class="mx-1" id="alt-brand"></p></li>
+                <li class="nav-item d-flex px-4"><p>Model year : </p><p class="mx-1" id="alt-year"></p></li>
             </ul>
         </div>
     </main>

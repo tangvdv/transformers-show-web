@@ -10,6 +10,7 @@ $type = ["alt"];
 
 $name = $_POST["alt-name"];
 $brand = $_POST["alt-brand"];
+$year = $_POST["alt-year"];
 $image = $_FILES["alt-image"];
 $id = $_GET["id"];
 $oldFileName = $_GET["image"];
@@ -45,6 +46,7 @@ if(isset($image["name"]) && !empty($image["name"])){
 $data = array(
     "alt_name" => $name,
     "brand" => $brand,
+    "model_year" => $year,
     "image" => $newFileName
 );
 

@@ -21,16 +21,19 @@ if(!isset($id) || empty($id)){
         <div class="container py-4">
             <form action="" id="form" method="POST" enctype="multipart/form-data">
                 <div class="row g-3">
-                    <div class="col-sm-5">
+                    <div class="col-12">
                         <label for="name" class="form-label">Name</label>
                         <input type="text" class="form-control" id="alt-name" name="alt-name">
                     </div>
 
-                    <div class="col-sm-5"></div>
-
-                    <div class="col-sm-5">
+                    <div class="col-12">
                         <label for="name" class="form-label">Brand</label>
                         <input type="text" class="form-control" id="alt-brand" name="alt-brand">
+                    </div>
+
+                    <div class="col-12">
+                        <label for="name" class="form-label">Model year</label>
+                        <input type="number" class="form-control" id="alt-year" name="alt-year">
                     </div>
 
                     <label for="image" class="form-label">Image</label>

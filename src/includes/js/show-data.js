@@ -63,7 +63,7 @@ function displayShowInformations(data){
         producers.push(producer.producer_name);
     });
     document.getElementById("show-producer").innerHTML = producers.join(' | ');
-    document.getElementById("show-director").innerHTML = show.director;
+    document.getElementById("show-director").innerHTML = show.director.director_name;
 }
 
 async function displayUpdateShow(id){
