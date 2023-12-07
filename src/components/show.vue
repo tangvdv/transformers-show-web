@@ -1,55 +1,30 @@
+<template>
+  <div type="button" class="poster-div card shadow-sm"  @click="redirect(id)">
+      <img v-if="imageSource(image)" class="poster rounded-2" :src="imageSource(image)">
+      <div class="card-body">
+          <p class="card-text text-center fs-5"> {{ show_name }} </p>
+      </div>
+  </div>
+</template>
+
 <script>
 export default {
-  data() {
-    return {
-      image_uri: "/images/show/",
-      items: []
-    }
-  },
-
+  name: "Show",
+  props: ['id', 'show_name', 'image'],
   methods: {
-    fetchData(){
-      fetch('http://localhost:3000/show', {
-        method: "GET"
-      })
-        .then((response) => {
-          response.json().then((data) => {
-            this.items = data
-          })
-        })
-        .catch((err) => {
-          console.error(err)
-        })
-    },
+      imageSource(image){
+        const image_uri = "/images/show/"
+        try{
+            return require(image_uri + image)
+        } catch (error) {
+            console.error("Image not found : " + image_uri + image)
+            return null
+        }
+      },
 
-    imageSource(image){
-      try{
-        return require(this.image_uri + image)
-      } catch (error) {
-        console.log("Image not found : " + this.image_uri + image)
-        return null
+      redirect(id){
+            window.location.href = `/src/show/show.php?id=${id}`
       }
-    },
-
-    redirect(id){
-      window.location.href = `/src/show/show.php?id=${id}`
-    }
-  },
-
-  created() {
-    this.fetchData()
   }
 }
 </script>
-
-<template>
-  <div v-if="items" class="row row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 py-4">
-    <div v-for="item in items.data" type="button" class="poster-div card shadow-sm"  @click="redirect(item.id)">
-      {{ item.image }}
-      <img v-if="imageSource(item.image)" class="poster rounded-2" :src="imageSource(item.image)">
-      <div class="card-body">
-          <p class="card-text text-center fs-5"> {{ item.show_name }} </p>
-      </div>
-    </div>
-  </div>
-</template>

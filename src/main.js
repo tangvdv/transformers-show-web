@@ -18,7 +18,13 @@ const origin = {
 import { createApp } from 'vue/dist/vue.esm-bundler'
 
 import Head from '/src/components/head.vue'
+import Show from '/src/components/show.vue'
 import App from './App.vue'
+
+const showContainer = document.getElementById("show-container")
+if(showContainer){
+    //createApp(Show).mount(showContainer)
+}
 
 createApp(App).mount(document.body)
 createApp(Head).mount(document.head)
