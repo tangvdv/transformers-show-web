@@ -1,16 +1,12 @@
-<?php
-$type = ["show"];
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <?php include_once __DIR__ . "/../includes/head.php" ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Shows</title>
 </head>
-<body onload="getShows()">
-<?php include_once __DIR__."/../includes/header.php"; ?>
+<body>
+    <header class="d-flex justify-content-center py-3 app-bg-color-red"></header>
     <main>
     <button type="button" class="btn btn-success m-2" onclick="window.location.href=`/src/show/createShow.php`;">Create</button>
     <div class="container">

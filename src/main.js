@@ -17,8 +17,8 @@ const origin = {
 
 import { createApp } from 'vue/dist/vue.esm-bundler'
 
-import Head from '/src/includes/head.vue'
-import Header from '/src/includes/header.vue'
+import Head from '/src/components/head.vue'
+import App from './App.vue'
 
-createApp(Head).mount('#head')
-createApp(Header).mount('#header')
+createApp(App).mount(document.body)
+createApp(Head).mount(document.head)
