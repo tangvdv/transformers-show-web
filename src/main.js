@@ -14,3 +14,11 @@ const origin = {
     5 : "Spanish",
     6 : "French"
 }
+
+import { createApp } from 'vue/dist/vue.esm-bundler'
+
+import Head from '/src/includes/head.vue'
+import Header from '/src/includes/header.vue'
+
+createApp(Head).mount('#head')
+createApp(Header).mount('#header')
