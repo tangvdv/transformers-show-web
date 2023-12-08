@@ -19,7 +19,6 @@ export default {
     }, 
     data() {
         return {
-            image_uri: "/images/show/",
             props: [ {id:"", show_name:"test", image:"es"} ],
             items: []
         }
