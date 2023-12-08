@@ -3,9 +3,9 @@
     <main>
         <div class="container">
             <div class="text-center">
-                <input class="form-control my-4" type="search" placeholder="Type to search...">
+                <input class="form-control my-4" placeholder="Type to search..." v-model="text" @input="filter">
             </div>
-            <ShowPost />
+            <ShowPost ref="showPostComponent" />
         </div>
     </main>
     <footer></footer>
@@ -20,6 +20,18 @@ export default {
     components:{ 
         AppHeader,
         ShowPost
+    },
+
+    data() {
+        return {
+            text: ''
+        }
+    },
+
+    methods: {
+        filter() {
+            this.$refs.showPostComponent.filterPosts(this.text)
+        }
     }
 }
 </script>
