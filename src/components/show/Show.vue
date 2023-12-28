@@ -1,10 +1,10 @@
 <template>
-  <div type="button" :class="[ !isVisible ? 'visually-hidden' : '', 'poster-div', 'card', 'shadow-sm', 'mx-4', 'p-0' ]"  @click="redirect(id)">
+  <router-link :class="[ !isVisible ? 'visually-hidden' : '', 'poster-div', 'card', 'shadow-sm', 'mx-4', 'p-0' ]" :to="'/show/'+id">
       <img class="poster rounded-2" :src="path + image">
       <div class="card-body">
           <p class="card-text text-center fs-5"> {{ show_name }} </p>
       </div>
-  </div>
+    </router-link>
 </template>
 
 <script>
@@ -19,7 +19,7 @@ export default {
   },
   methods: {
       redirect(id){
-            window.location.href = `/src/show/show.php?id=${id}`
+            window.location.href = `/src/show/show.html?id=${id}`
       }
   }
 }

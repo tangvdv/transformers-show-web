@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import Show from './show.vue'
+import Show from '/src/components/show/show.vue'
 const uri = "http://localhost:3000/show"
 
 export default {
@@ -49,6 +49,10 @@ export default {
             this.$refs.showComponent.forEach(show => {
                 show.isVisible = show.show_name.toLowerCase().includes(text.toLowerCase())
             })
+        },
+
+        test(){
+            console.log("yooo");
         }
     },
 

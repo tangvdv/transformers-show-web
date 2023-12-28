@@ -16,15 +16,14 @@ const origin = {
 }
 
 import { createApp } from 'vue/dist/vue.esm-bundler'
+import router from '/src/router/index.js'
 
 import Head from '/src/components/head.vue'
-import Show from '/src/components/show.vue'
 import App from './App.vue'
 
-const showContainer = document.getElementById("show-container")
-if(showContainer){
-    //createApp(Show).mount(showContainer)
-}
+const app = createApp(App)
 
-createApp(App).mount(document.body)
+app.use(router)
+app.mount('#app')
+
 createApp(Head).mount(document.head)
