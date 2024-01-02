@@ -22,12 +22,20 @@
                         </th>
                     </tr>
                 </thead>
-                <tbody class="table-group-divider" id="skin-table">
-                </tbody>
-
+                <tbody v-if="skins" class="table-group-divider" id="skin-table">
+                    <ShowDataBot 
+                        v-for="skin in skins"
+                        :key="skin.id"
+                        :id="skin.id"
+                        :image="skin.image"
+                        :screen_time="skin.screen_time"
+                        :bot="skin.bot"
+                        :alt="skin.alt"
+                        :voiceactor="skin.voiceactor" 
+                    />
+                </tbody>   
             </table>
         </div>
-
         <hr>
         <div class="text-center my-4" id="actor">
             <h2>Actor</h2>
@@ -44,3 +52,15 @@
         </div>
     </div>
 </template>
+
+<script>
+import ShowDataBot from '/src/components/show/ShowDataBot.vue'
+
+export default {
+    name: "ShowData",
+    props: ['skins', 'actors'],
+    components: {
+        ShowDataBot
+    }
+}
+</script>

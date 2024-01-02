@@ -14,8 +14,8 @@
         />
         <ShowData
             :key="items.id"
-            :skin="items.skin"
-            :actor="items.actor"
+            :skins="items.skin"
+            :actors="items.actor"
         />
     </div>
 </template>

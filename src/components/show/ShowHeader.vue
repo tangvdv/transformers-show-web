@@ -23,16 +23,6 @@
 <script>
 export default {
   name: "ShowInfo",
-  props: ['description', 'release_date', 'producer', 'director'],
-  data() {
-    return {
-      path: "http://localhost:5173/images/show/"
-    };
-  },
-  methods: {
-      redirect(id){
-            window.location.href = `/src/show/show.html?id=${id}`
-      }
-  }
+  props: ['description', 'release_date', 'producer', 'director']
 }
 </script>

@@ -25,7 +25,6 @@ export default {
             items: []
         }
     },
-
     methods: {
         async fetchData(){
             try{
@@ -49,10 +48,6 @@ export default {
             this.$refs.showComponent.forEach(show => {
                 show.isVisible = show.show_name.toLowerCase().includes(text.toLowerCase())
             })
-        },
-
-        test(){
-            console.log("yooo");
         }
     },
 
