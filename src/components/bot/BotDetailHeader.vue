@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "BotInfo",
+  name: "BotDetailInfo",
   props: ['description', 'faction'],
   data(){
     return{

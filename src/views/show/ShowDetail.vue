@@ -1,47 +1,57 @@
 <template>
-    <div v-if="isEmpty">
-        <ShowInfo 
+    <div v-if="isValid">
+        <ShowDetailInfo 
             :key="items.id"
             :show_name="items.show_name"
             :image="items.image"
         />
-        <ShowHeader 
+        <ShowDetailHeader 
             :key="items.id"
             :description="items.description"
             :release_date="items.release_date"
             :producer="items.producer"
             :director="items.director"
         />
-        <ShowData
+        <ShowDetailData
             :key="items.id"
             :skins="items.skin"
             :actors="items.actor"
         />
     </div>
+    <div v-else>
+        <RedirectStatusCode
+            :code="statusRequest.code"
+            :message="statusRequest.message"
+            :redirect_url="statusRequest.redirect_url"
+        />
+    </div>
 </template>
 
 <script>
-import ShowInfo from '/src/components/show/ShowInfo.vue'
-import ShowHeader from '/src/components/show/ShowHeader.vue'
-import ShowData from '/src/components/show/ShowData.vue'
+import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
+import ShowDetailInfo from '@/components/show/ShowDetailInfo.vue'
+import ShowDetailHeader from '@/components/show/ShowDetailHeader.vue'
+import ShowDetailData from '@/components/show/ShowDetailData.vue'
+
 const uri = "http://localhost:3000/show/id/"
 
 export default {
     name: "ShowDetail",
     components: {
-        ShowInfo,
-        ShowHeader,
-        ShowData
+        ShowDetailInfo,
+        ShowDetailHeader,
+        ShowDetailData,
+        RedirectStatusCode
     },
     data() {
         return {
-            items: []
-        }
-    },
-
-    computed:{
-        isEmpty: function () {
-            return this.items.length != 0
+            items: [],
+            isValid: false,
+            statusRequest: {
+                "code": "",
+                "message": "",
+                "redirect_url": "/show"
+            }
         }
     },
 
@@ -52,13 +62,14 @@ export default {
                     method: 'GET'
                 });
 
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-
                 const data = await response.json();
                 if(data.statusCode == 200){
                     this.items = data.data;
+                    this.isValid = true
+                }
+                else{
+                    this.statusRequest.code = data.statusCode
+                    this.statusRequest.message = data.data
                 }
             }
             catch (err){
@@ -71,6 +82,10 @@ export default {
         var id = this.$route.params.id
         if(parseInt(id)){
             this.fetchData(id);
+        }
+        else{
+            this.statusRequest.code = "404"
+            this.statusRequest.message = "Wrong parameter type"
         }
     }
 }

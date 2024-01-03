@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: "Bot",
+  name: "BotPostCard",
   props: ['id', 'bot_name', 'image'],
   data() {
     return {

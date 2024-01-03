@@ -1,11 +1,11 @@
 <template>
     <div v-if="isValid">
-        <BotInfo 
+        <BotDetailInfo 
             :key="items.id"
             :bot_name="items.bot_name"
             :image="items.image"
         />
-        <BotHeader 
+        <BotDetailHeader 
             :key="items.id"
             :description="items.description"
             :faction="items.faction"
@@ -21,17 +21,17 @@
 </template>
 
 <script>
-import RedirectStatusCode from '/src/views/RedirectStatusCode.vue'
-import BotInfo from '/src/components/bot/BotInfo.vue'
-import BotHeader from '/src/components/bot/BotHeader.vue'
+import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
+import BotDetailInfo from '@/components/bot/BotDetailInfo.vue'
+import BotDetailHeader from '@/components/bot/BotDetailHeader.vue'
 
 const uri = "http://localhost:3000/bot/id/"
 
 export default {
     name: "BotDetail",
     components: {
-    BotInfo,
-    BotHeader,
+    BotDetailInfo,
+    BotDetailHeader,
     RedirectStatusCode
 },
     data() {

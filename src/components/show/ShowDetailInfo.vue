@@ -12,17 +12,12 @@
 
 <script>
 export default {
-  name: "ShowInfo",
+  name: "ShowDetailInfo",
   props: ['show_name', 'image'],
   data() {
     return {
       path: "http://localhost:5173/images/show/"
     };
-  },
-  methods: {
-      redirect(id){
-            window.location.href = `/src/show/show.html?id=${id}`
-      }
   }
 }
 </script>

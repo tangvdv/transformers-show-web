@@ -22,7 +22,7 @@
 
 <script>
 export default {
-  name: "ShowInfo",
+  name: "ShowDetailInfo",
   props: ['description', 'release_date', 'producer', 'director']
 }
 </script>

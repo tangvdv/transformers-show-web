@@ -1,9 +1,10 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
-    { path: '/:pathMatch(.*)*', name: 'Notfound', component: () => import('/src/views/404.vue') },
-    { path: '/', name: 'home', component: ()=> import('/src/views/Main.vue'),
+    { path: '/', name: 'home',
         children: [
+            { path: '/:pathMatch(.*)*', name: 'Notfound', component: () => import('/src/views/RedirectStatusCode.vue'), props: { "code": 404, message: "This page does not exist", redirect_url: "/" } },
+
             { path: '/show', name: 'shows', component: ()=> import('/src/views/show/ShowPost.vue') },
             { path: '/show/:id', name: 'show', component: ()=> import('/src/views/show/ShowDetail.vue') },
 

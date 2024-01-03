@@ -10,7 +10,7 @@
 
 <script>
 export default {
-  name: "ShowDataActor",
+  name: "ShowDetailDataActor",
   props: ['id', 'actor_name', 'character', 'image'],
   data() {
     return {

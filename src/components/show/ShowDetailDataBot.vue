@@ -20,7 +20,7 @@
 <script>
 
 export default {
-  name: "ShowDataBot",
+  name: "ShowDetailDataBot",
   props: ['id', 'image', 'screen_time', 'bot', 'alt', 'voiceactor'],
   data() {
     return {

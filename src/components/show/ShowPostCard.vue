@@ -9,18 +9,13 @@
 
 <script>
 export default {
-  name: "Show",
+  name: "ShowPostCard",
   props: ['id', 'show_name', 'image'],
   data() {
     return {
       path: "http://localhost:5173/images/show/",
       isVisible: true
     };
-  },
-  methods: {
-      redirect(id){
-            window.location.href = `/src/show/show.html?id=${id}`
-      }
   }
 }
 </script>

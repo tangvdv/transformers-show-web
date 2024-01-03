@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: "BotInfo",
+  name: "BotDetailInfo",
   props: ['bot_name', 'image'],
   data() {
     return {

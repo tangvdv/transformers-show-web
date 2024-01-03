@@ -1,6 +1,7 @@
 <template>
+    <InputSearchPost @filterEvent="filterPosts" />
     <div v-if="items" class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 py-4" id="show-container">            
-        <Show 
+        <ShowPostCard
             ref="showComponent"
             v-for="item in items"
             :key="item.id"
@@ -12,14 +13,17 @@
 </template>
 
 <script>
-import Show from '/src/components/show/show.vue'
+import InputSearchPost from '@/components/InputSearchPost.vue'
+import ShowPostCard from '@/components/show/ShowPostCard.vue'
+
 const uri = "http://localhost:3000/show"
 
 export default {
     name: "ShowPost",
     components: {
-        Show
-    }, 
+    ShowPostCard,
+    InputSearchPost
+}, 
     data() {
         return {
             items: []
@@ -33,11 +37,11 @@ export default {
                 });
 
                 if (!response.ok) {
-                    throw new Error('Network response was not ok');
+                    throw new Error('Network response was not ok')
                 }
 
-                const data = await response.json();
-                this.items = data.data;
+                const data = await response.json()
+                this.items = data.data
             }
             catch (err){
                 console.error(err)

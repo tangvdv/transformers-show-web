@@ -23,7 +23,7 @@
                     </tr>
                 </thead>
                 <tbody v-if="skins" class="table-group-divider" id="skin-table">
-                    <ShowDataBot 
+                    <ShowDetailDataBot 
                         v-for="skin in skins"
                         :key="skin.id"
                         :id="skin.id"
@@ -40,7 +40,7 @@
         <div class="text-center my-4" id="actor">
             <h2>Actor</h2>
             <div v-if="actors" class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-10 g-3 py-4" id="actor-container"> 
-                <ShowDataActor 
+                <ShowDetailDataActor 
                     v-for="actor in actors"
                     :key="actor.id"
                     :id="actor.id"
@@ -62,15 +62,15 @@
 </template>
 
 <script>
-import ShowDataBot from '/src/components/show/ShowDataBot.vue'
-import ShowDataActor from '/src/components/show/ShowDataActor.vue'
+import ShowDetailDataBot from '@/components/show/ShowDetailDataBot.vue'
+import ShowDetailDataActor from '@/components/show/ShowDetailDataActor.vue'
 
 export default {
-    name: "ShowData",
+    name: "ShowDetailData",
     props: ['skins', 'actors'],
     components: {
-        ShowDataBot,
-        ShowDataActor
+        ShowDetailDataBot,
+        ShowDetailDataActor
     }
 }
 </script>
