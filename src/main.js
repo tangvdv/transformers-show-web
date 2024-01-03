@@ -1,12 +1,4 @@
-const factionArray = {
-    1 : "Autobot",
-    2 : "Decepticon",
-    3 : "Maximal",
-    4 : "Predacon",
-    5 : "Terrorcon"
-}
-
-const origin = {
+origin= {
     1 : "American",
     2 : "English",
     3 : "Japanese",
