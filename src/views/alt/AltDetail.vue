@@ -1,16 +1,16 @@
 <template>
     <div v-if="isValid">
-        <InputSearchPost @filterEvent="filterPosts" />
-        <div v-if="items" class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 py-4" id="show-container">            
-            <ShowPostCard
-                ref="showComponent"
-                v-for="item in items"
-                :key="item.id"
-                :id="item.id"
-                :show_name="item.show_name"
-                :image="item.image"
-            />
-        </div>
+        <AltDetailInfo 
+            :key="items.id"
+            :alt_name="items.alt_name"
+            :image="items.image"
+        />
+        <AltDetailHeader 
+            :key="items.id"
+            :description="items.description"
+            :brand="items.brand"
+            :model_year="items.model_year"
+        />
     </div>
     <div v-else>
         <RedirectStatusCode
@@ -23,18 +23,18 @@
 
 <script>
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
-import InputSearchPost from '@/components/InputSearchPost.vue'
-import ShowPostCard from '@/components/show/ShowPostCard.vue'
+import AltDetailInfo from '@/components/alt/AltDetailInfo.vue'
+import AltDetailHeader from '@/components/alt/AltDetailHeader.vue'
 
-const uri = "http://localhost:3000/show"
+const uri = "http://localhost:3000/alt/id/"
 
 export default {
-    name: "ShowPost",
+    name: "AltDetail",
     components: {
-    ShowPostCard,
-    InputSearchPost,
+    AltDetailInfo,
+    AltDetailHeader,
     RedirectStatusCode
-}, 
+},
     data() {
         return {
             items: [],
@@ -46,10 +46,11 @@ export default {
             }
         }
     },
+
     methods: {
-        async fetchData(){
+        async fetchData(id){
             try{
-                const response = await fetch(uri, {
+                const response = await fetch(uri+id, {
                     method: 'GET'
                 });
 
@@ -62,23 +63,25 @@ export default {
                     this.statusRequest.code = data.statusCode
                     if(data.statusCode != 500){
                         this.statusRequest.message = data.data
+                        this.statusRequest.redirect_url = "/alt"
                     }
-                }   
+                }
             }
             catch (err){
                 console.error(err)
             }
         },
-
-        filterPosts(text){
-            this.$refs.showComponent.forEach(show => {
-                show.isVisible = show.show_name.toLowerCase().includes(text.toLowerCase())
-            })
-        }
     },
 
-    beforeMount() {
-        this.fetchData()
+    beforeMount(){
+        var id = this.$route.params.id
+        if(parseInt(id)){
+            this.fetchData(id);
+        }
+        else{
+            this.statusRequest.code = "404"
+            this.statusRequest.message = "Wrong parameter type"
+        }
     }
 }
 </script>

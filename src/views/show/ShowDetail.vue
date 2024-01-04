@@ -50,7 +50,7 @@ export default {
             statusRequest: {
                 "code": "",
                 "message": "",
-                "redirect_url": "/show"
+                "redirect_url": "/"
             }
         }
     },
@@ -69,7 +69,10 @@ export default {
                 }
                 else{
                     this.statusRequest.code = data.statusCode
-                    this.statusRequest.message = data.data
+                    if(data.statusCode != 500){
+                        this.statusRequest.message = data.data
+                        this.statusRequest.redirect_url = "/show"
+                    }
                 }
             }
             catch (err){

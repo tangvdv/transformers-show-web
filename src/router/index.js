@@ -9,7 +9,10 @@ const routes = [
             { path: '/show/:id', name: 'show', component: ()=> import('/src/views/show/ShowDetail.vue') },
 
             { path: '/bot', name: 'bots', component: () => import('/src/views/bot/BotPost.vue') },
-            { path: '/bot/:id', name: 'bot', component: () => import('/src/views/bot/BotDetail.vue') },            
+            { path: '/bot/:id', name: 'bot', component: () => import('/src/views/bot/BotDetail.vue') },
+            
+            { path: '/alt', name: 'alts', component: () => import('/src/views/alt/AltPost.vue') },
+            { path: '/alt/:id', name: 'alt', component: () => import('/src/views/alt/AltDetail.vue') },
         ]
     }
 ]
