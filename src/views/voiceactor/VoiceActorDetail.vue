@@ -1,14 +1,13 @@
 <template>
     <div v-if="isValid">
-        <BotDetailInfo 
+        <VoiceActorDetailInfo 
             :key="items.id"
-            :bot_name="items.bot_name"
+            :voiceactor_name="items.voiceactor_name"
             :image="items.image"
         />
-        <BotDetailHeader 
+        <VoiceActorDetailHeader 
             :key="items.id"
-            :description="items.description"
-            :faction="items.faction"
+            :origin="items.origin"
         />
     </div>
     <div v-else>
@@ -22,16 +21,16 @@
 
 <script>
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
-import BotDetailInfo from '@/components/bot/BotDetailInfo.vue'
-import BotDetailHeader from '@/components/bot/BotDetailHeader.vue'
+import VoiceActorDetailInfo from '@/components/voiceactor/VoiceActorDetailInfo.vue'
+import VoiceActorDetailHeader from '@/components/voiceactor/VoiceActorDetailHeader.vue'
 
-const uri = "http://localhost:3000/bot/id/"
+const uri = "http://localhost:3000/voiceactor/id/"
 
 export default {
-    name: "BotDetail",
+    name: "ActorDetail",
     components: {
-    BotDetailInfo,
-    BotDetailHeader,
+    VoiceActorDetailInfo,
+    VoiceActorDetailHeader,
     RedirectStatusCode
 },
     data() {
@@ -62,7 +61,7 @@ export default {
                     this.statusRequest.code = data.statusCode
                     if(data.statusCode != 500){
                         this.statusRequest.message = data.data
-                        this.statusRequest.redirect_url = "/bot"
+                        this.statusRequest.redirect_url = "/voiceactor"
                     }
                 }
             }
@@ -80,7 +79,7 @@ export default {
         else{
             this.statusRequest.code = "404"
             this.statusRequest.message = "Wrong parameter type"
-            this.statusRequest.redirect_url = "/bot"
+            this.statusRequest.redirect_url = "/voiceactor"
         }
     }
 }

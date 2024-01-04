@@ -2,7 +2,8 @@ import { createRouter, createWebHistory } from 'vue-router'
 
 const routes = [
     { path: '/', name: 'home',
-        children: [
+        children: 
+        [
             { path: '/:pathMatch(.*)*', name: 'Notfound', component: () => import('/src/views/RedirectStatusCode.vue'), props: { "code": 404, message: "This page does not exist", redirect_url: "/" } },
 
             { path: '/show', name: 'shows', component: ()=> import('/src/views/show/ShowPost.vue') },
@@ -16,6 +17,9 @@ const routes = [
 
             { path: '/actor', name: 'actors', component: () => import('/src/views/actor/ActorPost.vue') },
             { path: '/actor/:id', name: 'actor', component: () => import('/src/views/actor/ActorDetail.vue') },
+
+            { path: '/voiceactor', name: 'voiceactors', component: () => import('/src/views/voiceactor/VoiceActorPost.vue') },
+            { path: '/voiceactor/:id', name: 'voiceactor', component: () => import('/src/views/voiceactor/VoiceActorDetail.vue') },
         ]
     }
 ]

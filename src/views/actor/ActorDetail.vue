@@ -80,6 +80,7 @@ export default {
         else{
             this.statusRequest.code = "404"
             this.statusRequest.message = "Wrong parameter type"
+            this.statusRequest.redirect_url = "/actor"
         }
     }
 }
