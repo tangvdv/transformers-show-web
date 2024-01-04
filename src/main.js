@@ -1,12 +1,3 @@
-origin= {
-    1 : "American",
-    2 : "English",
-    3 : "Japanese",
-    4 : "German",
-    5 : "Spanish",
-    6 : "French"
-}
-
 import { createApp } from 'vue/dist/vue.esm-bundler'
 import router from '/src/router/index.js'
 

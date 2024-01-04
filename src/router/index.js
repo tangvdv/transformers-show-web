@@ -13,6 +13,9 @@ const routes = [
             
             { path: '/alt', name: 'alts', component: () => import('/src/views/alt/AltPost.vue') },
             { path: '/alt/:id', name: 'alt', component: () => import('/src/views/alt/AltDetail.vue') },
+
+            { path: '/actor', name: 'actors', component: () => import('/src/views/actor/ActorPost.vue') },
+            { path: '/actor/:id', name: 'actor', component: () => import('/src/views/actor/ActorDetail.vue') },
         ]
     }
 ]
