@@ -1,33 +1,37 @@
 <template>
-    <div v-if="isValid">
-        <ShowDetailInfo 
-            :key="items.id"
-            :show_name="items.show_name"
-            :image="items.image"
-        />
-        <ShowDetailHeader 
-            :key="items.id"
-            :description="items.description"
-            :release_date="items.release_date"
-            :producer="items.producer"
-            :director="items.director"
-        />
-        <ShowDetailData
-            :key="items.id"
-            :skins="items.skin"
-            :actors="items.actor"
-        />
-    </div>
+    <ProgressCircle v-if="data == null" />
     <div v-else>
-        <RedirectStatusCode
-            :code="statusRequest.code"
-            :message="statusRequest.message"
-            :redirect_url="statusRequest.redirect_url"
-        />
+        <div v-if="isValid">
+            <ShowDetailInfo 
+                :key="items.id"
+                :show_name="items.show_name"
+                :image="items.image"
+            />
+            <ShowDetailHeader 
+                :key="items.id"
+                :description="items.description"
+                :release_date="items.release_date"
+                :producer="items.producer"
+                :director="items.director"
+            />
+            <ShowDetailData
+                :key="items.id"
+                :skins="items.skin"
+                :actors="items.actor"
+            />
+        </div>
+        <div v-else>
+            <RedirectStatusCode
+                :code="statusRequest.code"
+                :message="statusRequest.message"
+                :redirect_url="statusRequest.redirect_url"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import ShowDetailInfo from '@/components/show/ShowDetailInfo.vue'
 import ShowDetailHeader from '@/components/show/ShowDetailHeader.vue'
@@ -41,10 +45,12 @@ export default {
         ShowDetailInfo,
         ShowDetailHeader,
         ShowDetailData,
-        RedirectStatusCode
+        RedirectStatusCode,
+        ProgressCircle
     },
     data() {
         return {
+            data: null,
             items: [],
             isValid: false,
             statusRequest: {
@@ -62,15 +68,15 @@ export default {
                     method: 'GET'
                 });
 
-                const data = await response.json();
-                if(data.statusCode == 200){
-                    this.items = data.data;
+                this.data = await response.json();
+                if(this.data.statusCode == 200){
+                    this.items = this.data.data;
                     this.isValid = true
                 }
                 else{
-                    this.statusRequest.code = data.statusCode
-                    if(data.statusCode != 500){
-                        this.statusRequest.message = data.data
+                    this.statusRequest.code = this.data.statusCode
+                    if(this.data.statusCode != 500){
+                        this.statusRequest.message = this.data.data
                         this.statusRequest.redirect_url = "/show"
                     }
                 }

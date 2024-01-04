@@ -1,25 +1,29 @@
 <template>
-    <div v-if="isValid">
-        <VoiceActorDetailInfo 
-            :key="items.id"
-            :voiceactor_name="items.voiceactor_name"
-            :image="items.image"
-        />
-        <VoiceActorDetailHeader 
-            :key="items.id"
-            :origin="items.origin"
-        />
-    </div>
+    <ProgressCircle v-if="data == null" />
     <div v-else>
-        <RedirectStatusCode
-            :code="statusRequest.code"
-            :message="statusRequest.message"
-            :redirect_url="statusRequest.redirect_url"
-        />
+        <div v-if="isValid">
+            <VoiceActorDetailInfo 
+                :key="items.id"
+                :voiceactor_name="items.voiceactor_name"
+                :image="items.image"
+            />
+            <VoiceActorDetailHeader 
+                :key="items.id"
+                :origin="items.origin"
+            />
+        </div>
+        <div v-else>
+            <RedirectStatusCode
+                :code="statusRequest.code"
+                :message="statusRequest.message"
+                :redirect_url="statusRequest.redirect_url"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import VoiceActorDetailInfo from '@/components/voiceactor/VoiceActorDetailInfo.vue'
 import VoiceActorDetailHeader from '@/components/voiceactor/VoiceActorDetailHeader.vue'
@@ -31,10 +35,12 @@ export default {
     components: {
     VoiceActorDetailInfo,
     VoiceActorDetailHeader,
-    RedirectStatusCode
+    RedirectStatusCode,
+    ProgressCircle
 },
     data() {
         return {
+            data: null,
             items: [],
             isValid: false,
             statusRequest: {
@@ -52,15 +58,15 @@ export default {
                     method: 'GET'
                 });
 
-                const data = await response.json();
-                if(data.statusCode == 200){
-                    this.items = data.data;
+                this.data = await response.json();
+                if(this.data.statusCode == 200){
+                    this.items = this.data.data;
                     this.isValid = true
                 }
                 else{
-                    this.statusRequest.code = data.statusCode
-                    if(data.statusCode != 500){
-                        this.statusRequest.message = data.data
+                    this.statusRequest.code = this.data.statusCode
+                    if(this.data.statusCode != 500){
+                        this.statusRequest.message = this.data.data
                         this.statusRequest.redirect_url = "/voiceactor"
                     }
                 }

@@ -1,26 +1,30 @@
 <template>
-    <div v-if="isValid">
-        <BotDetailInfo 
-            :key="items.id"
-            :bot_name="items.bot_name"
-            :image="items.image"
-        />
-        <BotDetailHeader 
-            :key="items.id"
-            :description="items.description"
-            :faction="items.faction"
-        />
-    </div>
+    <ProgressCircle v-if="data == null" />
     <div v-else>
-        <RedirectStatusCode
-            :code="statusRequest.code"
-            :message="statusRequest.message"
-            :redirect_url="statusRequest.redirect_url"
-        />
+        <div v-if="isValid">
+            <BotDetailInfo 
+                :key="items.id"
+                :bot_name="items.bot_name"
+                :image="items.image"
+            />
+            <BotDetailHeader 
+                :key="items.id"
+                :description="items.description"
+                :faction="items.faction"
+            />
+        </div>
+        <div v-else>
+            <RedirectStatusCode
+                :code="statusRequest.code"
+                :message="statusRequest.message"
+                :redirect_url="statusRequest.redirect_url"
+            />
+        </div>
     </div>
 </template>
 
 <script>
+import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import BotDetailInfo from '@/components/bot/BotDetailInfo.vue'
 import BotDetailHeader from '@/components/bot/BotDetailHeader.vue'
@@ -32,10 +36,12 @@ export default {
     components: {
     BotDetailInfo,
     BotDetailHeader,
-    RedirectStatusCode
+    RedirectStatusCode,
+    ProgressCircle
 },
     data() {
         return {
+            data: null,
             items: [],
             isValid: false,
             statusRequest: {
@@ -53,15 +59,15 @@ export default {
                     method: 'GET'
                 });
 
-                const data = await response.json();
-                if(data.statusCode == 200){
-                    this.items = data.data;
+                this.data = await response.json();
+                if(this.data.statusCode == 200){
+                    this.items = this.data.data;
                     this.isValid = true
                 }
                 else{
-                    this.statusRequest.code = data.statusCode
-                    if(data.statusCode != 500){
-                        this.statusRequest.message = data.data
+                    this.statusRequest.code = this.data.statusCode
+                    if(this.data.statusCode != 500){
+                        this.statusRequest.message = this.data.data
                         this.statusRequest.redirect_url = "/bot"
                     }
                 }
