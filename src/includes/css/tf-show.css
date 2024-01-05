@@ -80,7 +80,7 @@
 }
 
 
-.table-bot-poster{
+.table-poster{
     width: 4em;
     height: 6em;
 }
@@ -92,4 +92,8 @@
 }
 .div-va-table:hover{
     background-color: rgba(0, 125, 29, .8);
+}
+
+.beauty-link{
+    text-decoration: none;
 }

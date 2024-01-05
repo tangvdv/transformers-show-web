@@ -7,11 +7,29 @@
                 :bot_name="items.bot_name"
                 :image="items.image"
             />
+            <hr>
             <BotDetailHeader 
                 :key="items.id"
                 :description="items.description"
                 :faction="items.faction"
             />
+            <BotDetailSkin 
+                :key="items.id"
+                :skins="items.skins"
+            />
+            <hr>
+            <h2 class="text-center">Alt</h2>
+            <BotDetailAlt
+                :key="items.id"
+                :skins="items.skins"
+            />
+            <hr>
+            <h2 class="text-center">Voice actor</h2>
+            <BotDetailVoiceActor
+                :key="items.id"
+                :skins="items.skins"
+            />
+            <hr>
         </div>
         <div v-else>
             <RedirectStatusCode
@@ -28,6 +46,9 @@ import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import BotDetailInfo from '@/components/bot/BotDetailInfo.vue'
 import BotDetailHeader from '@/components/bot/BotDetailHeader.vue'
+import BotDetailSkin from '@/components/bot/BotDetailSkin.vue'
+import BotDetailAlt from '@/components/bot/BotDetailAlt.vue'
+import BotDetailVoiceActor from '@/components/bot/BotDetailVoiceActor.vue'
 
 const uri = "http://localhost:3000/bot/id/"
 
@@ -37,7 +58,10 @@ export default {
     BotDetailInfo,
     BotDetailHeader,
     RedirectStatusCode,
-    ProgressCircle
+    ProgressCircle,
+    BotDetailSkin,
+    BotDetailAlt,
+    BotDetailVoiceActor
 },
     data() {
         return {

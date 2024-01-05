@@ -5,7 +5,6 @@
                 <h1 class="fw-light">{{ bot_name }}</h1>
                 <img class="poster my-4" :src="path + image">
             </div>
-            <hr>
         </div>
     </div>
 </template>
