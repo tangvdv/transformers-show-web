@@ -50,14 +50,6 @@
                 />           
             </div>
         </div>
-        <hr>
-        <div class="text-center my-4" id="artefact">
-            <h2>Artefact</h2>
-        </div>
-        <hr>
-        <div class="text-center my-4" id="anecdote">
-            <h2>Anecdote</h2>
-        </div>
     </div>
 </template>
 

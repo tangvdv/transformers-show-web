@@ -15,21 +15,16 @@
             />
             <BotDetailSkin 
                 :key="items.id"
-                :skins="items.skins"
+                :shows="items.show"
             />
             <hr>
-            <h2 class="text-center">Alt</h2>
-            <BotDetailAlt
-                :key="items.id"
-                :skins="items.skins"
-            />
-            <hr>
-            <h2 class="text-center">Voice actor</h2>
-            <BotDetailVoiceActor
-                :key="items.id"
-                :skins="items.skins"
-            />
-            <hr>
+            <h1 class="text-center my-4">Skins</h1>
+            <BotDetailCard 
+                v-for="show in items.show"
+                :key="show.id"
+                :show_name="show.show_name"
+                :skins="show.skin" 
+                />
         </div>
         <div v-else>
             <RedirectStatusCode
@@ -47,8 +42,7 @@ import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import BotDetailInfo from '@/components/bot/BotDetailInfo.vue'
 import BotDetailHeader from '@/components/bot/BotDetailHeader.vue'
 import BotDetailSkin from '@/components/bot/BotDetailSkin.vue'
-import BotDetailAlt from '@/components/bot/BotDetailAlt.vue'
-import BotDetailVoiceActor from '@/components/bot/BotDetailVoiceActor.vue'
+import BotDetailCard from '@/components/bot/BotDetailCard.vue'
 
 const uri = "http://localhost:3000/bot/id/"
 
@@ -60,8 +54,7 @@ export default {
     RedirectStatusCode,
     ProgressCircle,
     BotDetailSkin,
-    BotDetailAlt,
-    BotDetailVoiceActor
+    BotDetailCard
 },
     data() {
         return {
@@ -79,7 +72,7 @@ export default {
     methods: {
         async fetchData(id){
             try{
-                const response = await fetch(uri+id, {
+                const response = await fetch(uri+id+"?type=show", {
                     method: 'GET'
                 });
 

@@ -1,12 +1,12 @@
 <template>
-    <tr class="mx-2 text-center td-vertical-center">
+    <tr v-for="skin in show.skin" class="mx-2 text-center td-vertical-center">
         <td>
             <router-link :to="'/show/'+show.id" class="col">
                 <div class="themed-grid-col"><img :src="path + show.image" class="table-poster"></div>
                 <div class="themed-grid-col">{{ show.show_name }}</div>
             </router-link>
         </td>
-        <td>{{ screen_time }}</td>
+        <td>{{ skin.screen_time }}</td>
         <td>0</td>
         <td>0</td>
         <td>0</td>
@@ -19,7 +19,7 @@
 
 export default {
   name: "ShowDetailRow",
-  props: ['show', 'screen_time'],
+  props: ['show'],
   data() {
     return {
       path: "http://localhost:5173/images/show/"

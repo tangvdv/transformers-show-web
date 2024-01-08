@@ -12,7 +12,7 @@
                     <th class="col themed-grid-col">Death</th>
                 </tr>
             </thead>
-            <tbody v-if="skins" class="table-group-divider" id="skin-table">
+            <tbody v-if="shows" class="table-group-divider" id="skin-table">
                 <tr class="mx-2 text-center td-vertical-center table-active">
                     <td>/</td>
                     <td>{{ total_data.screen_time }}</td>
@@ -23,10 +23,9 @@
                     <td>{{ total_data.death_count }}</td>
                 </tr>
                 <BotDetailSkinRow 
-                    v-for="skin in skins"
-                    :key="skin.id"
-                    :show="skin.show"
-                    :screen_time="skin.screen_time"
+                    v-for="show in shows"
+                    :key="show.id"
+                    :show="show"
                 />
             </tbody>   
         </table>
@@ -42,7 +41,7 @@ export default {
     components: {
         BotDetailSkinRow
     },
-    props: ['skins'],
+    props: ['shows'],
     data(){
         return{
             total_data: {
@@ -57,13 +56,16 @@ export default {
     },
     methods: {
         calculateTotalData(){
-            this.skins.forEach(skin => {
-                this.total_data.screen_time += skin.screen_time
-                this.total_data.voice_line += skin.voice_line
-                this.total_data.transformation += skin.transformation
-                this.total_data.alt_transformation += skin.alt_transformation
-                this.total_data.robot_transformation += skin.robot_transformation
-                this.total_data.death_count += skin.death_count
+            this.shows.forEach(show =>{
+                show.skin.forEach(skin => {
+                    this.total_data.screen_time += skin.screen_time
+                    this.total_data.voice_line += skin.voice_line
+                    this.total_data.transformation += skin.transformation
+                    this.total_data.alt_transformation += skin.alt_transformation
+                    this.total_data.robot_transformation += skin.robot_transformation
+                    this.total_data.death_count += skin.death_count
+                
+                })
             })
         }
     },
