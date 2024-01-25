@@ -6,24 +6,26 @@
                 :key="items.id"
                 :bot_name="items.bot_name"
                 :image="items.image"
-            />
-            <hr>
-            <BotDetailHeader 
-                :key="items.id"
-                :description="items.description"
                 :faction="items.faction"
-            />
-            <BotDetailSkin 
-                :key="items.id"
                 :shows="items.show"
             />
             <hr>
-            <h1 class="text-center my-4">Skins</h1>
-            <BotDetailCard 
+            <div class="d-flex justify-content-center my-4">
+                <BotDetailShowCard @skinDetailEvent="showSkinId"
+                    v-for="show in items.show"
+                    :key="show.id"
+                    :id="show.id"
+                    :show_name="show.show_name"
+                    :image="show.image"
+                    />
+            </div>
+
+            <BotDetailCard
                 v-for="show in items.show"
+                ref="SkinDetailCardComponent"
                 :key="show.id"
-                :show_name="show.show_name"
-                :skins="show.skin" 
+                :id="show.id"
+                :show="show"
                 />
         </div>
         <div v-else>
@@ -40,9 +42,9 @@
 import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import BotDetailInfo from '@/components/bot/BotDetailInfo.vue'
-import BotDetailHeader from '@/components/bot/BotDetailHeader.vue'
 import BotDetailSkin from '@/components/bot/BotDetailSkin.vue'
 import BotDetailCard from '@/components/bot/BotDetailCard.vue'
+import BotDetailShowCard from '@/components/bot/BotDetailShowCard.vue'
 
 const uri = "http://localhost:3000/bot/id/"
 
@@ -50,11 +52,11 @@ export default {
     name: "BotDetail",
     components: {
     BotDetailInfo,
-    BotDetailHeader,
     RedirectStatusCode,
     ProgressCircle,
     BotDetailSkin,
-    BotDetailCard
+    BotDetailCard,
+    BotDetailShowCard
 },
     data() {
         return {
@@ -93,6 +95,12 @@ export default {
                 console.error(err)
             }
         },
+
+        showSkinId(id){
+            this.$refs.SkinDetailCardComponent.forEach(skin => {
+                skin.isVisible = skin.id == id
+            })
+        }
     },
 
     beforeMount(){
