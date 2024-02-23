@@ -3,16 +3,16 @@
     <div v-else>
         <div v-if="isValid">
             <BotDetailInfo 
-                :key="items.id"
-                :bot_name="items.bot_name"
-                :image="items.image"
-                :faction="items.faction"
-                :shows="items.show"
+                :key="data.id"
+                :bot_name="data.bot_name"
+                :image="data.image"
+                :faction="data.faction"
+                :shows="data.show"
             />
             <hr>
             <div class="d-flex justify-content-center my-4">
                 <BotDetailShowCard @skinDetailEvent="showSkinId"
-                    v-for="show in items.show"
+                    v-for="show in data.show"
                     :key="show.id"
                     :id="show.id"
                     :show_name="show.show_name"
@@ -21,7 +21,7 @@
             </div>
 
             <BotDetailCard
-                v-for="show in items.show"
+                v-for="show in data.show"
                 ref="SkinDetailCardComponent"
                 :key="show.id"
                 :id="show.id"
@@ -59,7 +59,6 @@ export default {
     data() {
         return {
             data: null,
-            items: [],
             isValid: false,
             statusRequest: {
                 "code": "",
@@ -71,26 +70,18 @@ export default {
 
     methods: {
         async fetchData(id){
-            try{
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/bot/id/${id}?type=show`, {
-                    method: 'GET'
-                });
-
-                this.data = await response.json();
-                if(this.data.statusCode == 200){
-                    this.items = this.data.data;
-                    this.isValid = true
-                }
-                else{
-                    this.statusRequest.code = this.data.statusCode
-                    if(this.data.statusCode != 500){
-                        this.statusRequest.message = this.data.data
-                        this.statusRequest.redirect_url = "/bot"
-                    }
-                }
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `bot/id/${id}?type=show`, {})
+            this.data = res.data
+            if(res.statusCode == 200){
+                this.isValid = true
             }
-            catch (err){
-                console.error(err)
+            else{
+                this.statusRequest.code = res.statusCode
+                if(res.statusCode != 500){
+                    this.statusRequest.message = res.data
+                    this.statusRequest.redirect_url = "/bot"
+                }
+                this.isValid = false
             }
         },
 

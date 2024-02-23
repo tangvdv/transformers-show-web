@@ -3,13 +3,13 @@
     <div v-else>
         <div v-if="isValid">
             <VoiceActorDetailInfo 
-                :key="items.id"
-                :voiceactor_name="items.voiceactor_name"
-                :image="items.image"
+                :key="data.id"
+                :voiceactor_name="data.voiceactor_name"
+                :image="data.image"
             />
             <VoiceActorDetailHeader 
-                :key="items.id"
-                :origin="items.origin"
+                :key="data.id"
+                :origin="data.origin"
             />
         </div>
         <div v-else>
@@ -39,7 +39,6 @@ export default {
     data() {
         return {
             data: null,
-            items: [],
             isValid: false,
             statusRequest: {
                 "code": "",
@@ -51,26 +50,18 @@ export default {
 
     methods: {
         async fetchData(id){
-            try{
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/voiceactor/id/${id}`, {
-                    method: 'GET'
-                });
-
-                this.data = await response.json();
-                if(this.data.statusCode == 200){
-                    this.items = this.data.data;
-                    this.isValid = true
-                }
-                else{
-                    this.statusRequest.code = this.data.statusCode
-                    if(this.data.statusCode != 500){
-                        this.statusRequest.message = this.data.data
-                        this.statusRequest.redirect_url = "/voiceactor"
-                    }
-                }
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `voiceactor/id/${id}`, {})
+            this.data = res.data
+            if(res.statusCode == 200){
+                this.isValid = true
             }
-            catch (err){
-                console.error(err)
+            else{
+                this.statusRequest.code = res.statusCode
+                if(res.statusCode != 500){
+                    this.statusRequest.message = res.data
+                    this.statusRequest.redirect_url = "/voiceactor"
+                }
+                this.isValid = false
             }
         },
     },

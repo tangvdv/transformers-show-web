@@ -3,14 +3,14 @@
     <div v-else>
         <div v-if="isValid">
             <ActorDetailInfo 
-                :key="items.id"
-                :actor_name="items.actor_name"
-                :image="items.image"
+                :key="data.id"
+                :actor_name="data.actor_name"
+                :image="data.image"
             />
             <ActorDetailHeader 
-                :key="items.id"
-                :character="items.character"
-                :origin="items.origin"
+                :key="data.id"
+                :character="data.character"
+                :origin="data.origin"
             />
         </div>
         <div v-else>
@@ -40,7 +40,6 @@ export default {
     data() {
         return {
             data: null,
-            items: [],
             isValid: false,
             statusRequest: {
                 "code": "",
@@ -52,26 +51,18 @@ export default {
 
     methods: {
         async fetchData(id){
-            try{
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/actor/id/${id}`, {
-                    method: 'GET'
-                });
-
-                this.data = await response.json();
-                if(this.data.statusCode == 200){
-                    this.items = this.data.data;
-                    this.isValid = true
-                }
-                else{
-                    this.statusRequest.code = this.data.statusCode
-                    if(this.data.statusCode != 500){
-                        this.statusRequest.message = this.data.data
-                        this.statusRequest.redirect_url = "/actor"
-                    }
-                }
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `actor/id/${id}`, {})
+            this.data = res.data
+            if(res.statusCode == 200){
+                this.isValid = true
             }
-            catch (err){
-                console.error(err)
+            else{
+                this.statusRequest.code = res.statusCode
+                if(res.statusCode != 500){
+                    this.statusRequest.message = res.data
+                    this.statusRequest.redirect_url = "/actor"
+                }
+                this.isValid = false
             }
         },
     },

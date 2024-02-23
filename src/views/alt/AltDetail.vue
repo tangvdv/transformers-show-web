@@ -3,15 +3,15 @@
     <div v-else>
         <div v-if="isValid">
             <AltDetailInfo 
-                :key="items.id"
-                :alt_name="items.alt_name"
-                :image="items.image"
+                :key="data.id"
+                :alt_name="data.alt_name"
+                :image="data.image"
             />
             <AltDetailHeader 
-                :key="items.id"
-                :description="items.description"
-                :brand="items.brand"
-                :model_year="items.model_year"
+                :key="data.id"
+                :description="data.description"
+                :brand="data.brand"
+                :model_year="data.model_year"
             />
         </div>
         <div v-else>
@@ -41,7 +41,6 @@ export default {
     data() {
         return {
             data: null,
-            items: [],
             isValid: false,
             statusRequest: {
                 "code": "",
@@ -53,26 +52,18 @@ export default {
 
     methods: {
         async fetchData(id){
-            try{
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/alt/id/${id}`, {
-                    method: 'GET'
-                });
-
-                this.data = await response.json();
-                if(this.data.statusCode == 200){
-                    this.items = this.data.data;
-                    this.isValid = true
-                }
-                else{
-                    this.statusRequest.code = this.data.statusCode
-                    if(this.data.statusCode != 500){
-                        this.statusRequest.message = this.data.data
-                        this.statusRequest.redirect_url = "/alt"
-                    }
-                }
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `alt/id/${id}`, {})
+            this.data = res.data
+            if(res.statusCode == 200){
+                this.isValid = true
             }
-            catch (err){
-                console.error(err)
+            else{
+                this.statusRequest.code = res.statusCode
+                if(res.statusCode != 500){
+                    this.statusRequest.message = res.data
+                    this.statusRequest.redirect_url = "/alt"
+                }
+                this.isValid = false
             }
         },
     },

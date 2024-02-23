@@ -3,10 +3,10 @@
     <div v-else>
         <div v-if="isValid">
             <InputSearchPost @filterEvent="filterPosts" />
-            <div v-if="items" class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 py-4" id="show-container">            
+            <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 py-4" id="show-container">            
                 <AltPostCard
                     ref="altComponent"
-                    v-for="item in items"
+                    v-for="item in data"
                     :key="item.id"
                     :id="item.id"
                     :alt_name="item.alt_name"
@@ -41,7 +41,6 @@ export default {
     data() {
         return {
             data: null,
-            items: [],
             isValid: false,
             statusRequest: {
                 "code": "",
@@ -52,25 +51,17 @@ export default {
     },
     methods: {
         async fetchData(){
-            try{
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/alt`, {
-                    method: 'GET'
-                });
-
-                this.data = await response.json();
-                if(this.data.statusCode == 200){
-                    this.items = this.data.data;
-                    this.isValid = true
-                }
-                else{
-                    this.statusRequest.code = this.data.statusCode
-                    if(this.data.statusCode != 500){
-                        this.statusRequest.message = this.data.data
-                    }
-                }
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `alt`, {})
+            this.data = res.data
+            if(res.statusCode == 200){
+                this.isValid = true
             }
-            catch (err){
-                console.error(err)
+            else{
+                this.statusRequest.code = res.statusCode
+                if(res.statusCode != 500){
+                    this.statusRequest.message = res.data
+                }
+                this.isValid = false
             }
         },
 

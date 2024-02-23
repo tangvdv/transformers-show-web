@@ -3,21 +3,21 @@
     <div v-else>
         <div v-if="isValid">
             <ShowDetailInfo 
-                :key="items.id"
-                :show_name="items.show_name"
-                :image="items.image"
+                :key="data.id"
+                :show_name="data.show_name"
+                :image="data.image"
             />
             <ShowDetailHeader 
-                :key="items.id"
-                :description="items.description"
-                :release_date="items.release_date"
-                :producer="items.producer"
-                :director="items.director"
+                :key="data.id"
+                :description="data.description"
+                :release_date="data.release_date"
+                :producer="data.producer"
+                :director="data.director"
             />
             <ShowDetailData
-                :key="items.id"
-                :skins="items.skin"
-                :actors="items.actor"
+                :key="data.id"
+                :skins="data.skin"
+                :actors="data.actor"
             />
         </div>
         <div v-else>
@@ -49,7 +49,6 @@ export default {
     data() {
         return {
             data: null,
-            items: [],
             isValid: false,
             statusRequest: {
                 "code": "",
@@ -61,26 +60,18 @@ export default {
 
     methods: {
         async fetchData(id){
-            try{
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/show/id/${id}`, {
-                    method: 'GET'
-                });
-
-                this.data = await response.json();
-                if(this.data.statusCode == 200){
-                    this.items = this.data.data;
-                    this.isValid = true
-                }
-                else{
-                    this.statusRequest.code = this.data.statusCode
-                    if(this.data.statusCode != 500){
-                        this.statusRequest.message = this.data.data
-                        this.statusRequest.redirect_url = "/show"
-                    }
-                }
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `show/id/${id}`, {})
+            this.data = res.data
+            if(res.statusCode == 200){
+                this.isValid = true
             }
-            catch (err){
-                console.error(err)
+            else{
+                this.statusRequest.code = res.statusCode
+                if(res.statusCode != 500){
+                    this.statusRequest.message = res.data
+                    this.statusRequest.redirect_url = "/show"
+                }
+                this.isValid = false
             }
         },
     },
