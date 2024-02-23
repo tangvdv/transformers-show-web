@@ -14,7 +14,7 @@ export default {
   props: ['voiceactor'],
   data() {
     return {
-      path: "http://localhost:5173/images/voiceactor/",
+      path: `${import.meta.env.VITE_WEBSITE_URL}/images/voiceactor/`,
       originArray: {
             1 : "American",
             2 : "English",

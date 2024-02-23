@@ -30,8 +30,6 @@ import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import InputSearchPost from '@/components/InputSearchPost.vue'
 import AltPostCard from '@/components/alt/AltPostCard.vue'
 
-const uri = "http://localhost:3000/alt"
-
 export default {
     name: "AltPost",
     components: {
@@ -55,7 +53,7 @@ export default {
     methods: {
         async fetchData(){
             try{
-                const response = await fetch(uri, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/alt`, {
                     method: 'GET'
                 });
 

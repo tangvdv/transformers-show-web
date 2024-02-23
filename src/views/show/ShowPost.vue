@@ -30,8 +30,6 @@ import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import InputSearchPost from '@/components/InputSearchPost.vue'
 import ShowPostCard from '@/components/show/ShowPostCard.vue'
 
-const uri = "http://localhost:3000/show"
-
 export default {
     name: "ShowPost",
     components: {
@@ -56,7 +54,7 @@ export default {
     methods: {
         async fetchData(){
             try{
-                const response = await fetch(uri, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/show`, {
                     method: 'GET'
                 });
 

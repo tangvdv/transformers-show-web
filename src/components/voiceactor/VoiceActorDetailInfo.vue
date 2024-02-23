@@ -16,7 +16,7 @@ export default {
   props: ['voiceactor_name', 'image'],
   data() {
     return {
-      path: "http://localhost:5173/images/voiceactor/"
+      path: `${import.meta.env.VITE_WEBSITE_URL}/images/voiceactor/`
     };
   }
 }

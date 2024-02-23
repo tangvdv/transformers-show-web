@@ -30,8 +30,6 @@ import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import AltDetailInfo from '@/components/alt/AltDetailInfo.vue'
 import AltDetailHeader from '@/components/alt/AltDetailHeader.vue'
 
-const uri = "http://localhost:3000/alt/id/"
-
 export default {
     name: "AltDetail",
     components: {
@@ -56,7 +54,7 @@ export default {
     methods: {
         async fetchData(id){
             try{
-                const response = await fetch(uri+id, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/alt/id/${id}`, {
                     method: 'GET'
                 });
 

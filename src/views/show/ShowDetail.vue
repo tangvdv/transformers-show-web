@@ -37,8 +37,6 @@ import ShowDetailInfo from '@/components/show/ShowDetailInfo.vue'
 import ShowDetailHeader from '@/components/show/ShowDetailHeader.vue'
 import ShowDetailData from '@/components/show/ShowDetailData.vue'
 
-const uri = "http://localhost:3000/show/id/"
-
 export default {
     name: "ShowDetail",
     components: {
@@ -64,7 +62,7 @@ export default {
     methods: {
         async fetchData(id){
             try{
-                const response = await fetch(uri+id, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/show/id/${id}`, {
                     method: 'GET'
                 });
 

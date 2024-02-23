@@ -29,8 +29,6 @@ import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import ActorDetailInfo from '@/components/actor/ActorDetailInfo.vue'
 import ActorDetailHeader from '@/components/actor/ActorDetailHeader.vue'
 
-const uri = "http://localhost:3000/actor/id/"
-
 export default {
     name: "ActorDetail",
     components: {
@@ -55,7 +53,7 @@ export default {
     methods: {
         async fetchData(id){
             try{
-                const response = await fetch(uri+id, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/actor/id/${id}`, {
                     method: 'GET'
                 });
 

@@ -13,7 +13,7 @@ export default {
   props: ['id', 'show_name', 'image'],
   data() {
     return {
-      path: "http://localhost:5173/images/show/",
+      path: `${import.meta.env.VITE_WEBSITE_URL}/images/show/`,
       isVisible: true
     };
   }

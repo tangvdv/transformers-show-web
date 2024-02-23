@@ -13,8 +13,8 @@ export default {
   props: ['image'],
   data() {
     return {
-      path: "http://localhost:5173/images/skin/",
-      default: "http://localhost:5173/resources/image-off.svg",
+      path: `${import.meta.env.VITE_WEBSITE_URL}/images/skin/`,
+      default: `${import.meta.env.VITE_WEBSITE_URL}/resources/image-off.svg`,
       imageLoaded: false
     };
   },

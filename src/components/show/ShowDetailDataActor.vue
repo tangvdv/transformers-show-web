@@ -14,7 +14,7 @@ export default {
   props: ['id', 'actor_name', 'character', 'image'],
   data() {
     return {
-      path: "http://localhost:5173/images/actor/"
+      path: `${import.meta.env.VITE_WEBSITE_URL}/images/actor/`
     };
   }
 }

@@ -30,8 +30,6 @@ import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import InputSearchPost from '@/components/InputSearchPost.vue'
 import BotPostCard from '@/components/bot/BotPostCard.vue'
 
-const uri = "http://localhost:3000/bot"
-
 export default {
     name: "BotPost",
     components: {
@@ -55,7 +53,7 @@ export default {
     methods: {
         async fetchData(){
             try{
-                const response = await fetch(uri, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/bot`, {
                     method: 'GET'
                 });
 

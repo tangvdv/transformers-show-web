@@ -28,8 +28,6 @@ import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import VoiceActorDetailInfo from '@/components/voiceactor/VoiceActorDetailInfo.vue'
 import VoiceActorDetailHeader from '@/components/voiceactor/VoiceActorDetailHeader.vue'
 
-const uri = "http://localhost:3000/voiceactor/id/"
-
 export default {
     name: "ActorDetail",
     components: {
@@ -54,7 +52,7 @@ export default {
     methods: {
         async fetchData(id){
             try{
-                const response = await fetch(uri+id, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/voiceactor/id/${id}`, {
                     method: 'GET'
                 });
 

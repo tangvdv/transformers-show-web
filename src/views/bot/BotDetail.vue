@@ -46,8 +46,6 @@ import BotDetailSkin from '@/components/bot/BotDetailSkin.vue'
 import BotDetailCard from '@/components/bot/BotDetailCard.vue'
 import BotDetailShowCard from '@/components/bot/BotDetailShowCard.vue'
 
-const uri = "http://localhost:3000/bot/id/"
-
 export default {
     name: "BotDetail",
     components: {
@@ -74,7 +72,7 @@ export default {
     methods: {
         async fetchData(id){
             try{
-                const response = await fetch(uri+id+"?type=show", {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/bot/id/${id}?type=show`, {
                     method: 'GET'
                 });
 

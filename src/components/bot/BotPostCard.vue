@@ -13,7 +13,7 @@ export default {
   props: ['id', 'bot_name', 'image'],
   data() {
     return {
-      path: "http://localhost:5173/images/bot/",
+      path: `${import.meta.env.VITE_WEBSITE_URL}/images/bot/`,
       isVisible: true
     };
   }

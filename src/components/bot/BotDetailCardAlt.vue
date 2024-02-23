@@ -13,7 +13,7 @@ export default {
   props: ['alt'],
   data() {
     return {
-      path: "http://localhost:5173/images/alt/"
+      path: `${import.meta.env.VITE_WEBSITE_URL}/images/alt/`
     };
   }
 }
