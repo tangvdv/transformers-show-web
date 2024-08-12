@@ -1,5 +1,5 @@
 <template>
-    <ProgressCircle v-if="data == null" />
+    <ProgressCircle v-if="!isFetched" />
     <div v-else>
         <div v-if="isValid">
             <InputSearchPost @filterEvent="filterPosts" />
@@ -29,6 +29,7 @@ import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import InputSearchPost from '@/components/InputSearchPost.vue'
 import ShowPostCard from '@/components/show/ShowPostCard.vue'
+import axios from 'axios'
 
 export default {
     name: "ShowPost",
@@ -42,6 +43,7 @@ export default {
         return {
             data: null,
             isValid: false,
+            isFetched: false,
             isFetching: false,
             statusRequest: {
                 "code": "",
@@ -52,16 +54,18 @@ export default {
     },
     methods: {
         async fetchData(){
-            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `show`, {})
-            this.data = res.data
-            if(res.statusCode == 200){
+            //this.data = await this.$root.$refs.RequestComponent.createApiRequest("GET", `users`, {})
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/api/users`);
+            this.data = response.data;
+            if(this.data != null) this.isFetched = true;
+
+            if(this.statusCode == 200){
                 this.isValid = true
+                console.log(this.data);
             }
             else{
-                this.statusRequest.code = res.statusCode
-                if(res.statusCode != 500){
-                    this.statusRequest.message = res.data
-                }
+                this.statusRequest.code = this.data.statusCode
+                this.statusRequest.message = this.data.message
                 this.isValid = false
             }
         },
