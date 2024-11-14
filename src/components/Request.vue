@@ -18,9 +18,9 @@ export default {
                 if(params && Object.keys(params).length > 0){
                     requestOptions["body"] = JSON.stringify(params)
                 }
-
-                const response = await fetch(`${import.meta.env.VITE_API_URL}/${route}`, requestOptions)
-
+                
+                const response = await fetch(`${import.meta.env.VITE_BACKEND_URL}/${route}`, requestOptions)
+                
                 this.data = await response.json();
 
                 if(this.data) return this.data
