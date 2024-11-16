@@ -53,10 +53,10 @@ export default {
     },
     methods: {
         async fetchData(){
-            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `test`, {})
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `shows`, {})
             
             if(res == null) return;
-            else this.isFetched = true
+            else this.isFetched = true            
 
             if(res.code === 200){
                 this.isValid = true

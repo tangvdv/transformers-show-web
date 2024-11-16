@@ -1,10 +1,10 @@
 <template>
-    <ProgressCircle v-if="data == null" />
+    <ProgressCircle v-if="!isFetched" />
     <div v-else>
         <div v-if="isValid">
             <ShowDetailInfo 
                 :key="data.id"
-                :show_name="data.show_name"
+                :show_name="data.name"
                 :image="data.image"
             />
             <ShowDetailHeader 
@@ -50,6 +50,7 @@ export default {
         return {
             data: null,
             isValid: false,
+            isFetched: false,
             statusRequest: {
                 "code": "",
                 "message": "",
@@ -60,18 +61,20 @@ export default {
 
     methods: {
         async fetchData(id){
-            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `show/id/${id}`, {})
-            this.data = res.data
-            if(res.statusCode == 200){
+            const res = await this.$root.$refs.RequestComponent.createApiRequest("GET", `shows/${id}`, {})
+            
+            if(res == null) return;
+            else this.isFetched = true
+
+            if(res.code === 200){
                 this.isValid = true
+                this.data = res.items
+                
             }
             else{
-                this.statusRequest.code = res.statusCode
-                if(res.statusCode != 500){
-                    this.statusRequest.message = res.data
-                    this.statusRequest.redirect_url = "/show"
-                }
                 this.isValid = false
+                this.statusRequest.code = res.code
+                this.statusRequest.message = res.message
             }
         },
     },
