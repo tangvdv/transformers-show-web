@@ -28,10 +28,10 @@
 import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
 import InputSearchPost from '@/components/InputSearchPost.vue'
-import BotPostCard from '@/components/bot/BotPostCard.vue'
+import BotPostCard from '@/components/character/BotPostCard.vue'
 
 export default {
-    name: "BotPost",
+    name: "CharacterPost",
     components: {
     BotPostCard,
     InputSearchPost,

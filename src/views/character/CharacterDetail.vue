@@ -41,13 +41,13 @@
 <script>
 import ProgressCircle from '@/components/ProgressCircle.vue'
 import RedirectStatusCode from '@/views/RedirectStatusCode.vue'
-import BotDetailInfo from '@/components/bot/BotDetailInfo.vue'
-import BotDetailSkin from '@/components/bot/BotDetailSkin.vue'
-import BotDetailCard from '@/components/bot/BotDetailCard.vue'
-import BotDetailShowCard from '@/components/bot/BotDetailShowCard.vue'
+import BotDetailInfo from '@/components/character/BotDetailInfo.vue'
+import BotDetailSkin from '@/components/character/BotDetailSkin.vue'
+import BotDetailCard from '@/components/character/BotDetailCard.vue'
+import BotDetailShowCard from '@/components/character/BotDetailShowCard.vue'
 
 export default {
-    name: "BotDetail",
+    name: "CharacterDetail",
     components: {
     BotDetailInfo,
     RedirectStatusCode,
