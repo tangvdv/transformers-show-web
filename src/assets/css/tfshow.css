@@ -124,6 +124,12 @@ html{
 
 
 /* COMPONENT */
+.loading-circle{
+    height: 50px;
+    width: 50px;
+    margin-top: 25%;
+}
+
 .container{
     margin-left: 247px;
     margin-right: 247px;

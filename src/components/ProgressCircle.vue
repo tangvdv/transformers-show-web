@@ -1,6 +1,6 @@
 <template>
-  <div class="d-flex row justify-content-center center">
-    <img :src="path" class="img-size" alt="Loading" />
+  <div class="flex justify-content-center">
+    <img :src="path" class="loading-circle" alt="Loading" />
   </div>
 </template>
 
@@ -9,7 +9,7 @@ export default {
   name: "ProgressCircle",
   data() {
     return {
-      path: `${import.meta.env.VITE_WEBSITE_URL}/resources/loading-circle.gif`
+      path: `${import.meta.env.VITE_WEBSITE_URL}/src/assets/loading-loop.svg`
     };
   }
 }
