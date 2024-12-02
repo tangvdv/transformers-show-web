@@ -1,6 +1,9 @@
 <template>
-    <div class="text-center">
-        <input class="form-control my-4" placeholder="Type to search..." v-model="text" @input="this.$emit('filterEvent', text)">
+    <div class="search-bar shadow flex">
+        <input class="input flex-grow" placeholder="Search..." v-model="text" @input="this.$emit('filterEvent', text)">
+        <div class="search-glass flex-basis flex justify-content-center">
+            <img :src="path" />
+        </div>
     </div>
 </template>
 
@@ -10,7 +13,8 @@ export default {
     name: "InputSearchPost",
     data() {
         return {
-            text: ''
+            text: '',
+            path: `${import.meta.env.VITE_WEBSITE_URL}/src/assets/search_glass.svg`
         }
     }
 

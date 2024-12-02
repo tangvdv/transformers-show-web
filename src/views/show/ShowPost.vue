@@ -2,7 +2,9 @@
     <ProgressCircle v-if="!isFetched" />
     <div v-else>
         <div v-if="isValid">
-            <InputSearchPost @filterEvent="filterPosts" />
+            <div class="m-custom flex justify-content-center" style="--m: 30px">
+                <InputSearchPost @filterEvent="filterPosts" />
+            </div>
             <div class="row justify-content-center row-cols-1 row-cols-sm-2 row-cols-md-5 g-3 py-4" id="show-container">            
                 <ShowPostCard
                     ref="showComponent"
