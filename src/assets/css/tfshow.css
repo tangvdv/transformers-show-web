@@ -55,6 +55,9 @@ html{
 .text-light{
     color: white;
 }
+.text-dark{
+    color: black;
+}
 
 .bg-red{
     background-color: var(--red);
@@ -135,11 +138,33 @@ html{
     margin-top: var(--m);
 }
 
+/* SHADOW */
+.shadow{
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+}
 
 
 /* COMPONENT */
-.shadow{
-    box-shadow: 1px 1px 5px rgba(0,0,0,0.25);
+.show-card-bg{
+    background-color: aqua;
+}
+.show-card{
+    width: 200px;
+    height: 338px;
+    border-radius: 5px;
+}
+.show-card > img{
+    width: 200px;
+    height: 285px;
+    border-radius: 5px;
+}
+.show-card > p{
+    text-align: center;
+    margin: 0;
+    padding-left: 4px;
+    padding-right: 4px;
+    font-size: 16px;
+    font-family: "heeboMedium";
 }
 
 .search-bar{
@@ -232,6 +257,10 @@ header{
     height: 100px;
 }
 
+.link{
+    text-decoration: none;
+}
+
 .nav-link{
     text-decoration: none;
     background-color: transparent;
@@ -274,15 +303,6 @@ header{
 
 
 
-
-.poster{
-    width: 16em;
-    height: 24em;
-}
-.poster-div{
-    width: 16.12em;
-    height:29em;
-}
 
 
 .actor-poster-regular{
