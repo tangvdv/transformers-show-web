@@ -145,17 +145,15 @@ html{
 
 
 /* COMPONENT */
-.show-card-bg{
-    background-color: aqua;
-}
 .show-card{
-    width: 200px;
-    height: 338px;
+    width: 265px;
+    height: 447px;
     border-radius: 5px;
+    box-sizing: border-box;
 }
 .show-card > img{
-    width: 200px;
-    height: 285px;
+    width: 265px;
+    height: 377px;
     border-radius: 5px;
 }
 
@@ -200,8 +198,8 @@ html{
 }
 
 .container{
-    margin-left: 247px;
-    margin-right: 247px;
+    margin-left: 100px;
+    margin-right: 100px;
 }
 
 .logo-default{
@@ -284,6 +282,11 @@ header{
 .nav{
     list-style: none;
     text-decoration: none;
+    list-style-type: none;
+    color: black;
+}
+.nav:active{
+    color: black;
 }
 
 

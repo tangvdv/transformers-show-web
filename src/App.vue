@@ -2,7 +2,7 @@
         <HeaderHomePage v-if="homePage"></HeaderHomePage>
         <Header v-else></Header>
     <main>
-        <div class="container">
+        <div class="container text-dark">
             <router-view />
         </div>
     </main>
