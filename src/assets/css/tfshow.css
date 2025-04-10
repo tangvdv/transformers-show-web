@@ -158,13 +158,14 @@ html{
     height: 285px;
     border-radius: 5px;
 }
-.show-card > p{
+
+.show-card-title{
     text-align: center;
     margin: 0;
     padding-left: 4px;
     padding-right: 4px;
-    font-size: 16px;
     font-family: "heeboMedium";
+    overflow-wrap: anywhere;
 }
 
 .search-bar{
