@@ -289,6 +289,10 @@ header{
     color: black;
 }
 
+.visually-hidden{
+    display: none;
+}
+
 
 /* SIZE */
 .h-100{

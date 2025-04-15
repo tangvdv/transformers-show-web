@@ -73,7 +73,7 @@ export default {
 
         filterPosts(text){
             this.$refs.showComponent.forEach(show => {
-                show.isVisible = show.show_name.toLowerCase().includes(text.toLowerCase())
+                show.isVisible = show.show_name.toLowerCase().includes(text.toLowerCase().trim())             
             })
         }
     },
